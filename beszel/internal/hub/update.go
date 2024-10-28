@@ -22,7 +22,7 @@ func Update(_ *cobra.Command, _ []string) {
 	updater, _ := selfupdate.NewUpdater(selfupdate.Config{
 		Filters: []string{"beszel_"},
 	})
-	latest, found, err = updater.DetectLatest("henrygd/beszel")
+	latest, found, err = updater.DetectLatest("empowerists/beszel")
 
 	if err != nil {
 		fmt.Println("Error checking for updates:", err)
