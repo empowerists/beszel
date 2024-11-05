@@ -1,14 +1,15 @@
-import { toast } from '@/components/ui/use-toast'
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-import { $alerts, $copyContent, $systems, $userSettings, pb } from './stores'
-import { AlertRecord, ChartTimeData, ChartTimes, SystemRecord } from '@/types'
-import { RecordModel, RecordSubscription } from 'pocketbase'
-import { WritableAtom } from 'nanostores'
-import { timeDay, timeHour } from 'd3-time'
-import { useEffect, useState } from 'react'
-import { CpuIcon, HardDriveIcon, MemoryStickIcon, ServerIcon } from 'lucide-react'
-import { EthernetIcon, ThermometerIcon } from '@/components/ui/icons'
+import { toast } from "@/components/ui/use-toast"
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+import { $alerts, $copyContent, $systems, $userSettings, pb } from "./stores"
+import { AlertInfo, AlertRecord, ChartTimeData, ChartTimes, SystemRecord } from "@/types"
+import { RecordModel, RecordSubscription } from "pocketbase"
+import { WritableAtom } from "nanostores"
+import { timeDay, timeHour } from "d3-time"
+import { useEffect, useState } from "react"
+import { CpuIcon, HardDriveIcon, MemoryStickIcon, ServerIcon } from "lucide-react"
+import { EthernetIcon, ThermometerIcon } from "@/components/ui/icons"
+import { t } from "@lingui/macro"
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs))
@@ -21,7 +22,7 @@ export async function copyToClipboard(content: string) {
 		await navigator.clipboard.writeText(content)
 		toast({
 			duration,
-			description: 'Copied to clipboard',
+			description: t`Copied to clipboard`,
 		})
 	} catch (e: any) {
 		$copyContent.set(content)
@@ -29,22 +30,22 @@ export async function copyToClipboard(content: string) {
 }
 
 const verifyAuth = () => {
-	pb.collection('users')
+	pb.collection("users")
 		.authRefresh()
 		.catch(() => {
 			pb.authStore.clear()
 			toast({
-				title: 'Failed to authenticate',
-				description: 'Please log in again',
-				variant: 'destructive',
+				title: t`Failed to authenticate`,
+				description: t`Please log in again`,
+				variant: "destructive",
 			})
 		})
 }
 
 export const updateSystemList = async () => {
 	const records = await pb
-		.collection<SystemRecord>('systems')
-		.getFullList({ sort: '+name', fields: 'id,name,host,info,status' })
+		.collection<SystemRecord>("systems")
+		.getFullList({ sort: "+name", fields: "id,name,host,info,status" })
 	if (records.length) {
 		$systems.set(records)
 	} else {
@@ -53,52 +54,36 @@ export const updateSystemList = async () => {
 }
 
 export const updateAlerts = () => {
-	pb.collection('alerts')
-		.getFullList<AlertRecord>({ fields: 'id,name,system,value,min,triggered', sort: 'updated' })
+	pb.collection("alerts")
+		.getFullList<AlertRecord>({ fields: "id,name,system,value,min,triggered", sort: "updated" })
 		.then((records) => {
 			$alerts.set(records)
 		})
 }
 
 const hourWithMinutesFormatter = new Intl.DateTimeFormat(undefined, {
-	hour: 'numeric',
-	minute: 'numeric',
+	hour: "numeric",
+	minute: "numeric",
 })
 export const hourWithMinutes = (timestamp: string) => {
 	return hourWithMinutesFormatter.format(new Date(timestamp))
 }
 
 const shortDateFormatter = new Intl.DateTimeFormat(undefined, {
-	day: 'numeric',
-	month: 'short',
-	hour: 'numeric',
-	minute: 'numeric',
+	day: "numeric",
+	month: "short",
+	hour: "numeric",
+	minute: "numeric",
 })
 export const formatShortDate = (timestamp: string) => {
-	// console.log('ts', timestamp)
 	return shortDateFormatter.format(new Date(timestamp))
 }
 
-// const dayTimeFormatter = new Intl.DateTimeFormat(undefined, {
-// 	// day: 'numeric',
-// 	// month: 'short',
-// 	hour: 'numeric',
-// 	weekday: 'short',
-// 	minute: 'numeric',
-// 	// dateStyle: 'short',
-// })
-// export const formatDayTime = (timestamp: string) => {
-// 	// console.log('ts', timestamp)
-// 	return dayTimeFormatter.format(new Date(timestamp))
-// }
-
 const dayFormatter = new Intl.DateTimeFormat(undefined, {
-	day: 'numeric',
-	month: 'short',
-	// dateStyle: 'medium',
+	day: "numeric",
+	month: "short",
 })
 export const formatDay = (timestamp: string) => {
-	// console.log('ts', timestamp)
 	return dayFormatter.format(new Date(timestamp))
 }
 
@@ -106,19 +91,14 @@ export const updateFavicon = (newIcon: string) => {
 	;(document.querySelector("link[rel='icon']") as HTMLLinkElement).href = `/static/${newIcon}`
 }
 
-export const isAdmin = () => pb.authStore.model?.role === 'admin'
-export const isReadOnlyUser = () => pb.authStore.model?.role === 'readonly'
-// export const isDefaultUser = () => pb.authStore.model?.role === 'user'
+export const isAdmin = () => pb.authStore.model?.role === "admin"
+export const isReadOnlyUser = () => pb.authStore.model?.role === "readonly"
 
 /** Update systems / alerts list when records change  */
-export function updateRecordList<T extends RecordModel>(
-	e: RecordSubscription<T>,
-	$store: WritableAtom<T[]>
-) {
+export function updateRecordList<T extends RecordModel>(e: RecordSubscription<T>, $store: WritableAtom<T[]>) {
 	const curRecords = $store.get()
 	const newRecords = []
-	// console.log('e', e)
-	if (e.action === 'delete') {
+	if (e.action === "delete") {
 		for (const server of curRecords) {
 			if (server.id !== e.record.id) {
 				newRecords.push(server)
@@ -143,51 +123,51 @@ export function updateRecordList<T extends RecordModel>(
 export function getPbTimestamp(timeString: ChartTimes, d?: Date) {
 	d ||= chartTimeData[timeString].getOffset(new Date())
 	const year = d.getUTCFullYear()
-	const month = String(d.getUTCMonth() + 1).padStart(2, '0')
-	const day = String(d.getUTCDate()).padStart(2, '0')
-	const hours = String(d.getUTCHours()).padStart(2, '0')
-	const minutes = String(d.getUTCMinutes()).padStart(2, '0')
-	const seconds = String(d.getUTCSeconds()).padStart(2, '0')
+	const month = String(d.getUTCMonth() + 1).padStart(2, "0")
+	const day = String(d.getUTCDate()).padStart(2, "0")
+	const hours = String(d.getUTCHours()).padStart(2, "0")
+	const minutes = String(d.getUTCMinutes()).padStart(2, "0")
+	const seconds = String(d.getUTCSeconds()).padStart(2, "0")
 
 	return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
 }
 
 export const chartTimeData: ChartTimeData = {
-	'1h': {
-		type: '1m',
+	"1h": {
+		type: "1m",
 		expectedInterval: 60_000,
-		label: '1 hour',
+		label: () => t`1 hour`,
 		// ticks: 12,
 		format: (timestamp: string) => hourWithMinutes(timestamp),
 		getOffset: (endTime: Date) => timeHour.offset(endTime, -1),
 	},
-	'12h': {
-		type: '10m',
+	"12h": {
+		type: "10m",
 		expectedInterval: 60_000 * 10,
-		label: '12 hours',
+		label: () => t`12 hours`,
 		ticks: 12,
 		format: (timestamp: string) => hourWithMinutes(timestamp),
 		getOffset: (endTime: Date) => timeHour.offset(endTime, -12),
 	},
-	'24h': {
-		type: '20m',
+	"24h": {
+		type: "20m",
 		expectedInterval: 60_000 * 20,
-		label: '24 hours',
+		label: () => t`24 hours`,
 		format: (timestamp: string) => hourWithMinutes(timestamp),
 		getOffset: (endTime: Date) => timeHour.offset(endTime, -24),
 	},
-	'1w': {
-		type: '120m',
+	"1w": {
+		type: "120m",
 		expectedInterval: 60_000 * 120,
-		label: '1 week',
+		label: () => t`1 week`,
 		ticks: 7,
 		format: (timestamp: string) => formatDay(timestamp),
 		getOffset: (endTime: Date) => timeDay.offset(endTime, -7),
 	},
-	'30d': {
-		type: '480m',
+	"30d": {
+		type: "480m",
 		expectedInterval: 60_000 * 480,
-		label: '30 days',
+		label: () => t`30 days`,
 		ticks: 30,
 		format: (timestamp: string) => formatDay(timestamp),
 		getOffset: (endTime: Date) => timeDay.offset(endTime, -30),
@@ -202,8 +182,8 @@ export function useYAxisWidth() {
 	function updateYAxisWidth(str: string) {
 		if (str.length > maxChars) {
 			maxChars = str.length
-			const div = document.createElement('div')
-			div.className = 'text-xs tabular-nums tracking-tighter table sr-only'
+			const div = document.createElement("div")
+			div.className = "text-xs tabular-nums tracking-tighter table sr-only"
 			div.innerHTML = str
 			clearTimeout(timeout)
 			timeout = setTimeout(() => {
@@ -249,7 +229,7 @@ function getStorageValue(key: string, defaultValue: any) {
 }
 
 /** Hook to sync value in local storage */
-export const useLocalStorage = (key: string, defaultValue: any) => {
+export function useLocalStorage<T>(key: string, defaultValue: T) {
 	key = `besz-${key}`
 	const [value, setValue] = useState(() => {
 		return getStorageValue(key, defaultValue)
@@ -263,20 +243,18 @@ export const useLocalStorage = (key: string, defaultValue: any) => {
 
 export async function updateUserSettings() {
 	try {
-		const req = await pb.collection('user_settings').getFirstListItem('', { fields: 'settings' })
+		const req = await pb.collection("user_settings").getFirstListItem("", { fields: "settings" })
 		$userSettings.set(req.settings)
 		return
 	} catch (e) {
-		console.log('get settings', e)
+		console.log("get settings", e)
 	}
 	// create user settings if error fetching existing
 	try {
-		const createdSettings = await pb
-			.collection('user_settings')
-			.create({ user: pb.authStore.model!.id })
+		const createdSettings = await pb.collection("user_settings").create({ user: pb.authStore.model!.id })
 		$userSettings.set(createdSettings.settings)
 	} catch (e) {
-		console.log('create settings', e)
+		console.log("create settings", e)
 	}
 }
 
@@ -290,51 +268,52 @@ export const getSizeAndUnit = (n: number, isGigabytes = true) => {
 	const sizeInGB = isGigabytes ? n : n / 1_000
 
 	if (sizeInGB >= 1_000) {
-		return { v: sizeInGB / 1_000, u: ' TB' }
+		return { v: sizeInGB / 1_000, u: " TB" }
 	} else if (sizeInGB >= 1) {
-		return { v: sizeInGB, u: ' GB' }
+		return { v: sizeInGB, u: " GB" }
 	}
-	return { v: n, u: ' MB' }
+	return { v: n, u: " MB" }
 }
 
 export const chartMargin = { top: 12 }
 
-export const alertInfo = {
+export const alertInfo: Record<string, AlertInfo> = {
 	Status: {
-		name: 'Status',
-		unit: '',
+		name: () => t`Status`,
+		unit: "",
 		icon: ServerIcon,
-		desc: 'Triggers when status switches between up and down.',
+		desc: () => t`Triggers when status switches between up and down`,
 		single: true,
 	},
 	CPU: {
-		name: 'CPU usage',
-		unit: '%',
+		name: () => t`CPU Usage`,
+		unit: "%",
 		icon: CpuIcon,
-		desc: 'Triggers when CPU usage exceeds a threshold.',
+		desc: () => t`Triggers when CPU usage exceeds a threshold`,
 	},
 	Memory: {
-		name: 'memory usage',
-		unit: '%',
+		name: () => t`Memory Usage`,
+		unit: "%",
 		icon: MemoryStickIcon,
-		desc: 'Triggers when memory usage exceeds a threshold.',
+		desc: () => t`Triggers when memory usage exceeds a threshold`,
 	},
 	Disk: {
-		name: 'disk usage',
-		unit: '%',
+		name: () => t`Disk Usage`,
+		unit: "%",
 		icon: HardDriveIcon,
-		desc: 'Triggers when usage of any disk exceeds a threshold.',
+		desc: () => t`Triggers when usage of any disk exceeds a threshold`,
 	},
 	Bandwidth: {
-		name: 'bandwidth',
-		unit: ' MB/s',
+		name: () => t`Bandwidth`,
+		unit: " MB/s",
 		icon: EthernetIcon,
-		desc: 'Triggers when combined up/down exceeds a threshold.',
+		desc: () => t`Triggers when combined up/down exceeds a threshold`,
+		max: 125,
 	},
 	Temperature: {
-		name: 'temperature',
-		unit: '°C',
+		name: () => t`Temperature`,
+		unit: "°C",
 		icon: ThermometerIcon,
-		desc: 'Triggers when any sensor exceeds a threshold.',
+		desc: () => t`Triggers when any sensor exceeds a threshold`,
 	},
 }

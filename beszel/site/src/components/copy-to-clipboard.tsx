@@ -1,20 +1,22 @@
-import { useEffect, useMemo, useRef } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './ui/dialog'
-import { Textarea } from './ui/textarea'
-import { $copyContent } from '@/lib/stores'
+import { useEffect, useMemo, useRef } from "react"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog"
+import { Textarea } from "./ui/textarea"
+import { $copyContent } from "@/lib/stores"
+import { Trans } from "@lingui/macro"
 
 export default function CopyToClipboard({ content }: { content: string }) {
 	return (
 		<Dialog defaultOpen={true}>
-			<DialogContent className="w-[90%] rounded-lg" style={{ maxWidth: 530 }}>
+			<DialogContent className="w-[90%] rounded-lg md:pt-4" style={{ maxWidth: 530 }}>
 				<DialogHeader>
-					<DialogTitle>Could not copy to clipboard</DialogTitle>
-					<DialogDescription>Please copy the text manually.</DialogDescription>
+					<DialogTitle>
+						<Trans>Copy text</Trans>
+					</DialogTitle>
+					<DialogDescription className="hidden xs:block">
+						<Trans>Automatic copy requires a secure context.</Trans>
+					</DialogDescription>
 				</DialogHeader>
 				<CopyTextarea content={content} />
-				<p className="text-sm text-muted-foreground">
-					Clipboard API requires a secure context (https, localhost, or *.localhost)
-				</p>
 			</DialogContent>
 		</Dialog>
 	)
@@ -24,7 +26,7 @@ function CopyTextarea({ content }: { content: string }) {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 	const rows = useMemo(() => {
-		return content.split('\n').length
+		return content.split("\n").length
 	}, [content])
 
 	useEffect(() => {
@@ -34,7 +36,7 @@ function CopyTextarea({ content }: { content: string }) {
 	}, [textareaRef])
 
 	useEffect(() => {
-		return () => $copyContent.set('')
+		return () => $copyContent.set("")
 	}, [])
 
 	return (

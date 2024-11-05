@@ -1,36 +1,38 @@
-import { Area, AreaChart, CartesianGrid, YAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, YAxis } from "recharts"
 
-import { ChartContainer, ChartTooltip, ChartTooltipContent, xAxis } from '@/components/ui/chart'
-import {
-	useYAxisWidth,
-	cn,
-	toFixedFloat,
-	decimalString,
-	formatShortDate,
-	chartMargin,
-} from '@/lib/utils'
-import { memo } from 'react'
-import { ChartData } from '@/types'
+import { ChartContainer, ChartTooltip, ChartTooltipContent, xAxis } from "@/components/ui/chart"
+import { useYAxisWidth, cn, toFixedFloat, decimalString, formatShortDate, chartMargin } from "@/lib/utils"
+import { memo } from "react"
+import { ChartData } from "@/types"
+import { t } from "@lingui/macro"
+import { useLingui } from "@lingui/react"
 
 export default memo(function MemChart({ chartData }: { chartData: ChartData }) {
 	const { yAxisWidth, updateYAxisWidth } = useYAxisWidth()
+	const { _ } = useLingui()
 
 	const totalMem = toFixedFloat(chartData.systemStats.at(-1)?.stats.m ?? 0, 1)
 
 	// console.log('rendered at', new Date())
 
+	if (chartData.systemStats.length === 0) {
+		return null
+	}
+
 	return (
 		<div>
 			{/* {!yAxisSet && <Spinner />} */}
 			<ChartContainer
-				className={cn('h-full w-full absolute aspect-auto bg-card opacity-0 transition-opacity', {
-					'opacity-100': yAxisWidth,
+				className={cn("h-full w-full absolute aspect-auto bg-card opacity-0 transition-opacity", {
+					"opacity-100": yAxisWidth,
 				})}
 			>
 				<AreaChart accessibilityLayer data={chartData.systemStats} margin={chartMargin}>
 					<CartesianGrid vertical={false} />
 					{totalMem && (
 						<YAxis
+							direction="ltr"
+							orientation={chartData.orientation}
 							// use "ticks" instead of domain / tickcount if need more control
 							domain={[0, totalMem]}
 							tickCount={9}
@@ -40,7 +42,7 @@ export default memo(function MemChart({ chartData }: { chartData: ChartData }) {
 							axisLine={false}
 							tickFormatter={(value) => {
 								const val = toFixedFloat(value, 1)
-								return updateYAxisWidth(val + ' GB')
+								return updateYAxisWidth(val + " GB")
 							}}
 						/>
 					)}
@@ -54,13 +56,13 @@ export default memo(function MemChart({ chartData }: { chartData: ChartData }) {
 								// @ts-ignore
 								itemSorter={(a, b) => a.order - b.order}
 								labelFormatter={(_, data) => formatShortDate(data[0].payload.created)}
-								contentFormatter={(item) => decimalString(item.value) + ' GB'}
+								contentFormatter={(item) => decimalString(item.value) + " GB"}
 								// indicator="line"
 							/>
 						}
 					/>
 					<Area
-						name="Used"
+						name={_(t`Used`)}
 						order={3}
 						dataKey="stats.mu"
 						type="monotoneX"
@@ -84,7 +86,7 @@ export default memo(function MemChart({ chartData }: { chartData: ChartData }) {
 						/>
 					)}
 					<Area
-						name="Cache / Buffers"
+						name={_(t`Cache / Buffers`)}
 						order={1}
 						dataKey="stats.mb"
 						type="monotoneX"

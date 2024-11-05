@@ -1,11 +1,12 @@
-import { UserAuthForm } from '@/components/login/auth-form'
-import { Logo } from '../logo'
-import { useEffect, useMemo, useState } from 'react'
-import { pb } from '@/lib/stores'
-import { useStore } from '@nanostores/react'
-import ForgotPassword from './forgot-pass-form'
-import { $router } from '../router'
-import { AuthMethodsList } from 'pocketbase'
+import { UserAuthForm } from "@/components/login/auth-form"
+import { Logo } from "../logo"
+import { useEffect, useMemo, useState } from "react"
+import { pb } from "@/lib/stores"
+import { useStore } from "@nanostores/react"
+import ForgotPassword from "./forgot-pass-form"
+import { $router } from "../router"
+import { AuthMethodsList } from "pocketbase"
+import { t } from "@lingui/macro"
 
 export default function () {
 	const page = useStore($router)
@@ -13,15 +14,15 @@ export default function () {
 	const [authMethods, setAuthMethods] = useState<AuthMethodsList>()
 
 	useEffect(() => {
-		document.title = 'Login / Beszel'
+		document.title = t`Login` + " / Beszel"
 
-		pb.send('/api/beszel/first-run', {}).then(({ firstRun }) => {
+		pb.send("/api/beszel/first-run", {}).then(({ firstRun }) => {
 			setFirstRun(firstRun)
 		})
 	}, [])
 
 	useEffect(() => {
-		pb.collection('users')
+		pb.collection("users")
 			.listAuthMethods()
 			.then((methods) => {
 				setAuthMethods(methods)
@@ -30,11 +31,11 @@ export default function () {
 
 	const subtitle = useMemo(() => {
 		if (isFirstRun) {
-			return 'Please create an admin account'
-		} else if (page?.path === '/forgot-password') {
-			return 'Enter email address to reset password'
+			return t`Please create an admin account`
+		} else if (page?.path === "/forgot-password") {
+			return t`Enter email address to reset password`
 		} else {
-			return 'Please sign in to your account'
+			return t`Please sign in to your account`
 		}
 	}, [isFirstRun, page])
 
@@ -44,7 +45,7 @@ export default function () {
 
 	return (
 		<div className="min-h-svh grid items-center py-12">
-			<div className="grid gap-5 w-full px-4 mx-auto" style={{ maxWidth: '22em' }}>
+			<div className="grid gap-5 w-full px-4 mx-auto" style={{ maxWidth: "22em" }}>
 				<div className="text-center">
 					<h1 className="mb-3">
 						<Logo className="h-7 fill-foreground mx-auto" />
@@ -52,7 +53,7 @@ export default function () {
 					</h1>
 					<p className="text-sm text-muted-foreground">{subtitle}</p>
 				</div>
-				{page?.path === '/forgot-password' ? (
+				{page?.path === "/forgot-password" ? (
 					<ForgotPassword />
 				) : (
 					<UserAuthForm isFirstRun={isFirstRun} authMethods={authMethods} />

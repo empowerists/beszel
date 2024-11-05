@@ -1,10 +1,11 @@
-import { createRouter } from '@nanostores/router'
+import { createRouter } from "@nanostores/router"
 
 export const $router = createRouter(
 	{
-		home: '/',
-		server: '/system/:name',
-		settings: '/settings/:name?',
+		home: "/",
+		server: "/system/:name",
+		settings: "/settings/:name?",
+		forgot_password: "/forgot-password",
 	},
 	{ links: false }
 )

@@ -1,12 +1,6 @@
-import { Area, AreaChart, CartesianGrid, YAxis } from 'recharts'
-import {
-	ChartConfig,
-	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent,
-	xAxis,
-} from '@/components/ui/chart'
-import { memo, useMemo } from 'react'
+import { Area, AreaChart, CartesianGrid, YAxis } from "recharts"
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent, xAxis } from "@/components/ui/chart"
+import { memo, useMemo } from "react"
 import {
 	useYAxisWidth,
 	cn,
@@ -16,18 +10,18 @@ import {
 	toFixedFloat,
 	getSizeAndUnit,
 	toFixedWithoutTrailingZeros,
-} from '@/lib/utils'
+} from "@/lib/utils"
 // import Spinner from '../spinner'
-import { useStore } from '@nanostores/react'
-import { $containerFilter } from '@/lib/stores'
-import { ChartData } from '@/types'
-import { Separator } from '../ui/separator'
+import { useStore } from "@nanostores/react"
+import { $containerFilter } from "@/lib/stores"
+import { ChartData } from "@/types"
+import { Separator } from "../ui/separator"
 
 export default memo(function ContainerChart({
 	dataKey,
 	chartData,
 	chartName,
-	unit = '%',
+	unit = "%",
 }: {
 	dataKey: string
 	chartData: ChartData
@@ -39,7 +33,7 @@ export default memo(function ContainerChart({
 
 	const { containerData } = chartData
 
-	const isNetChart = chartName === 'net'
+	const isNetChart = chartName === "net"
 
 	const chartConfig = useMemo(() => {
 		let config = {} as Record<
@@ -52,7 +46,7 @@ export default memo(function ContainerChart({
 		const totalUsage = {} as Record<string, number>
 		for (let stats of containerData) {
 			for (let key in stats) {
-				if (!key || key === 'created') {
+				if (!key || key === "created") {
 					continue
 				}
 				if (!(key in totalUsage)) {
@@ -87,7 +81,7 @@ export default memo(function ContainerChart({
 			tickFormatter: (value: any) => string
 		}
 		// tick formatter
-		if (chartName === 'cpu') {
+		if (chartName === "cpu") {
 			obj.tickFormatter = (value) => {
 				const val = toFixedWithoutTrailingZeros(value, 2) + unit
 				return updateYAxisWidth(val)
@@ -95,7 +89,7 @@ export default memo(function ContainerChart({
 		} else {
 			obj.tickFormatter = (value) => {
 				const { v, u } = getSizeAndUnit(value, false)
-				return updateYAxisWidth(`${toFixedFloat(v, 2)}${u}${isNetChart ? '/s' : ''}`)
+				return updateYAxisWidth(`${toFixedFloat(v, 2)}${u}${isNetChart ? "/s" : ""}`)
 			}
 		}
 		// tooltip formatter
@@ -107,10 +101,10 @@ export default memo(function ContainerChart({
 					return (
 						<span className="flex">
 							{decimalString(received)} MB/s
-							<span className="opacity-70 ml-0.5"> rx </span>
+							<span className="opacity-70 ms-0.5"> rx </span>
 							<Separator orientation="vertical" className="h-3 mx-1.5 bg-primary/40" />
 							{decimalString(sent)} MB/s
-							<span className="opacity-70 ml-0.5"> tx</span>
+							<span className="opacity-70 ms-0.5"> tx</span>
 						</span>
 					)
 				} catch (e) {
@@ -122,20 +116,24 @@ export default memo(function ContainerChart({
 		}
 		// data function
 		if (isNetChart) {
-			obj.dataFunction = (key: string, data: any) => (data[key]?.nr ?? 0) + (data[key]?.ns ?? 0)
+			obj.dataFunction = (key: string, data: any) => (data[key]?.nr ?? null) + (data[key]?.ns ?? null)
 		} else {
-			obj.dataFunction = (key: string, data: any) => data[key]?.[dataKey] ?? 0
+			obj.dataFunction = (key: string, data: any) => data[key]?.[dataKey] ?? null
 		}
 		return obj
 	}, [])
 
 	// console.log('rendered at', new Date())
 
+	if (containerData.length === 0) {
+		return null
+	}
+
 	return (
 		<div>
 			<ChartContainer
-				className={cn('h-full w-full absolute aspect-auto bg-card opacity-0 transition-opacity', {
-					'opacity-100': yAxisWidth,
+				className={cn("h-full w-full absolute aspect-auto bg-card opacity-0 transition-opacity", {
+					"opacity-100": yAxisWidth,
 				})}
 			>
 				<AreaChart
@@ -147,6 +145,8 @@ export default memo(function ContainerChart({
 				>
 					<CartesianGrid vertical={false} />
 					<YAxis
+						direction="ltr"
+						orientation={chartData.orientation}
 						className="tracking-tighter"
 						width={yAxisWidth}
 						tickFormatter={tickFormatter}

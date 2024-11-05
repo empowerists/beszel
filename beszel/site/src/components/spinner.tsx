@@ -1,9 +1,13 @@
-import { LoaderCircleIcon } from 'lucide-react'
+import { LoaderCircleIcon } from "lucide-react"
 
-export default function () {
+export default function ({ msg }: { msg?: string }) {
 	return (
-		<div className="grid place-content-center h-full absolute inset-0">
-			<LoaderCircleIcon className="animate-spin h-10 w-10 opacity-60" />
+		<div className="flex flex-col items-center justify-center h-full absolute inset-0">
+			{msg ? (
+				<p className={"opacity-60 mb-2 text-center px-4"}>{msg}</p>
+			) : (
+				<LoaderCircleIcon className="animate-spin h-10 w-10 opacity-60" />
+			)}
 		</div>
 	)
 }

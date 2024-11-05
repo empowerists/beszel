@@ -4,6 +4,7 @@ A lightweight server resource monitoring hub with historical data, docker stats,
 
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/henrygd/beszel-agent/0.1.0?logo=docker&label=agent%20image%20size)](https://hub.docker.com/r/henrygd/beszel-agent)
 [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/henrygd/beszel/0.1.0?logo=docker&label=hub%20image%20size)](https://hub.docker.com/r/henrygd/beszel)
+[![Crowdin](https://badges.crowdin.net/beszel/localized.svg)](https://crowdin.com/project/beszel)
 
 ![Screenshot of the hub](https://henrygd-assets.b-cdn.net/beszel/screenshot.png)
 
@@ -55,14 +56,12 @@ You can install the hub and agent as single binaries or using Docker.
 
 The agent uses host network mode to access network interface stats, which automatically exposes the port. Change the port using an environment variable if needed.
 
-If you don't require network stats, remove that line from the compose file and map the port manually.
-
-> **Note**: If disk I/O stats are missing or incorrect, try using the `FILESYSTEM` environment variable ([instructions here](#finding-the-correct-filesystem)). Check agent logs to see the current device being used.
+If you don't need network stats, remove that line from the compose file and map the port manually.
 
 ### Binary
 
 > [!TIP]
-> If using Linux, see [guides/systemd.md](/supplemental/guides/systemd.md) for a script to install the hub or agent as a system service. The agent installer will be built into the web UI in the future.
+> If using Linux, see [guides/systemd.md](/supplemental/guides/systemd.md) for a script to install the hub or agent as a system service. This is also built into the web UI.
 
 Download and run the latest binaries from the [releases page](https://github.com/henrygd/beszel/releases) or use the commands below.
 
@@ -169,8 +168,8 @@ Mount a folder from the target filesystem in the container's `/extra-filesystems
 
 ```yaml
 volumes:
-  - /mnt/disk1/.beszel:/extra-filesystems/disk1:ro
-  - /dev/mmcblk0/.beszel:/extra-filesystems/sd-card:ro
+  - /mnt/disk1/.beszel:/extra-filesystems/sdb1:ro
+  - /dev/mmcblk0/.beszel:/extra-filesystems/mmcblk0:ro
 ```
 
 ### Binary
@@ -258,13 +257,31 @@ Pausing/unpausing the agent for longer than one minute will result in incomplete
 
 Both the hub and agent are written in Go, so you can easily build them yourself, or cross-compile for different platforms. Please [install Go](https://go.dev/doc/install) first if you haven't already.
 
-### Prepare dependencies
+### Using Makefile
+
+Run `make` in `/beszel`. This creates a `build` directory containing the binaries.
+
+```bash
+cd beszel && make
+```
+
+You can also build for different platforms:
+
+```bash
+make OS=freebsd ARCH=arm64
+```
+
+See a list of valid options by running `go tool dist list`.
+
+### Manual compilation
+
+#### Prepare dependencies
 
 ```bash
 cd beszel && go mod tidy
 ```
 
-### Agent
+#### Agent
 
 Go to `beszel/cmd/agent` and run the following command to create a binary in the current directory:
 
@@ -272,7 +289,7 @@ Go to `beszel/cmd/agent` and run the following command to create a binary in the
 CGO_ENABLED=0 go build -ldflags "-w -s" .
 ```
 
-### Hub
+#### Hub
 
 The hub embeds the web UI in the binary, so you must build the website first. I use [Bun](https://bun.sh/), but you may use Node.js if you prefer:
 
@@ -288,7 +305,7 @@ Then in `beszel/cmd/hub`:
 CGO_ENABLED=0 go build -ldflags "-w -s" .
 ```
 
-### Cross-compiling
+#### Cross-compiling
 
 You can cross-compile for different platforms using the `GOOS` and `GOARCH` environment variables.
 
@@ -298,7 +315,15 @@ For example, to build for FreeBSD ARM64:
 GOOS=freebsd GOARCH=arm64 CGO_ENABLED=0 go build -ldflags "-w -s" .
 ```
 
-You can see a list of valid options by running `go tool dist list`.
+See a list of valid options by running `go tool dist list`.
+
+## Contributing
+
+Contributions are welcome, but it's a good idea to check with us first in a discussion / issue if you plan on doing anything significant.
+
+We use [Crowdin](https://crowdin.com/project/beszel) to manage translations. New languages or improvements to existing translations are appreciated!
+
+We'll have more helpful information about contributing to Beszel in the near future.
 
 ## License
 

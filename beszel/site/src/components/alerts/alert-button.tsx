@@ -1,6 +1,6 @@
-import { memo, useState } from 'react'
-import { useStore } from '@nanostores/react'
-import { $alerts, $systems } from '@/lib/stores'
+import { memo, useState } from "react"
+import { useStore } from "@nanostores/react"
+import { $alerts, $systems } from "@/lib/stores"
 import {
 	Dialog,
 	DialogTrigger,
@@ -8,15 +8,16 @@ import {
 	DialogDescription,
 	DialogHeader,
 	DialogTitle,
-} from '@/components/ui/dialog'
-import { BellIcon, GlobeIcon, ServerIcon } from 'lucide-react'
-import { alertInfo, cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { AlertRecord, SystemRecord } from '@/types'
-import { Link } from '../router'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Checkbox } from '../ui/checkbox'
-import { SystemAlert, SystemAlertGlobal } from './alerts-system'
+} from "@/components/ui/dialog"
+import { BellIcon, GlobeIcon, ServerIcon } from "lucide-react"
+import { alertInfo, cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { AlertRecord, SystemRecord } from "@/types"
+import { Link } from "../router"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Checkbox } from "../ui/checkbox"
+import { SystemAlert, SystemAlertGlobal } from "./alerts-system"
+import { Trans, t } from "@lingui/macro"
 
 export default memo(function AlertsButton({ system }: { system: SystemRecord }) {
 	const alerts = useStore($alerts)
@@ -28,16 +29,10 @@ export default memo(function AlertsButton({ system }: { system: SystemRecord }) 
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button
-					variant="ghost"
-					size="icon"
-					aria-label="Alerts"
-					data-nolink
-					onClick={() => setOpened(true)}
-				>
+				<Button variant="ghost" size="icon" aria-label={t`Alerts`} data-nolink onClick={() => setOpened(true)}>
 					<BellIcon
-						className={cn('h-[1.2em] w-[1.2em] pointer-events-none', {
-							'fill-primary': active,
+						className={cn("h-[1.2em] w-[1.2em] pointer-events-none", {
+							"fill-primary": active,
 						})}
 					/>
 				</Button>
@@ -54,7 +49,7 @@ function TheContent({
 }: {
 	data: { system: SystemRecord; alerts: AlertRecord[]; systemAlerts: AlertRecord[] }
 }) {
-	const [overwriteExisting, setOverwriteExisting] = useState<boolean | 'indeterminate'>(false)
+	const [overwriteExisting, setOverwriteExisting] = useState<boolean | "indeterminate">(false)
 	const systems = $systems.get()
 
 	const data = Object.keys(alertInfo).map((key) => {
@@ -69,24 +64,28 @@ function TheContent({
 	return (
 		<>
 			<DialogHeader>
-				<DialogTitle className="text-xl">Alerts</DialogTitle>
+				<DialogTitle className="text-xl">
+					<Trans>Alerts</Trans>
+				</DialogTitle>
 				<DialogDescription>
-					See{' '}
-					<Link href="/settings/notifications" className="link">
-						notification settings
-					</Link>{' '}
-					to configure how you receive alerts.
+					<Trans>
+						See{" "}
+						<Link href="/settings/notifications" className="link">
+							notification settings
+						</Link>{" "}
+						to configure how you receive alerts.
+					</Trans>
 				</DialogDescription>
 			</DialogHeader>
 			<Tabs defaultValue="system">
 				<TabsList className="mb-1 -mt-0.5">
 					<TabsTrigger value="system">
-						<ServerIcon className="mr-2 h-3.5 w-3.5" />
+						<ServerIcon className="me-2 h-3.5 w-3.5" />
 						{system.name}
 					</TabsTrigger>
 					<TabsTrigger value="global">
-						<GlobeIcon className="mr-1.5 h-3.5 w-3.5" />
-						All systems
+						<GlobeIcon className="me-1.5 h-3.5 w-3.5" />
+						<Trans>All Systems</Trans>
 					</TabsTrigger>
 				</TabsList>
 				<TabsContent value="system">
@@ -107,17 +106,11 @@ function TheContent({
 							checked={overwriteExisting}
 							onCheckedChange={setOverwriteExisting}
 						/>
-						Overwrite existing alerts
+						<Trans>Overwrite existing alerts</Trans>
 					</label>
 					<div className="grid gap-3">
 						{data.map((d) => (
-							<SystemAlertGlobal
-								key={d.key}
-								data={d}
-								overwrite={overwriteExisting}
-								alerts={alerts}
-								systems={systems}
-							/>
+							<SystemAlertGlobal key={d.key} data={d} overwrite={overwriteExisting} alerts={alerts} systems={systems} />
 						))}
 					</div>
 				</TabsContent>

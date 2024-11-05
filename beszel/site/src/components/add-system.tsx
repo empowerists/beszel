@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 import {
 	Dialog,
 	DialogContent,
@@ -7,17 +7,19 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '@/components/ui/dialog'
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
+} from "@/components/ui/dialog"
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { $publicKey, pb } from '@/lib/stores'
-import { Copy, PlusIcon } from 'lucide-react'
-import { useState, useRef, MutableRefObject } from 'react'
-import { useStore } from '@nanostores/react'
-import { cn, copyToClipboard, isReadOnlyUser } from '@/lib/utils'
-import { navigate } from './router'
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { $publicKey, pb } from "@/lib/stores"
+import { Copy, PlusIcon } from "lucide-react"
+import { useState, useRef, MutableRefObject } from "react"
+import { useStore } from "@nanostores/react"
+import { cn, copyToClipboard, isReadOnlyUser } from "@/lib/utils"
+import { navigate } from "./router"
+import { Trans } from "@lingui/macro"
 
 export function AddSystemButton({ className }: { className?: string }) {
 	const [open, setOpen] = useState(false)
@@ -37,8 +39,13 @@ export function AddSystemButton({ className }: { className?: string }) {
       # - /mnt/disk1/.beszel:/extra-filesystems/disk1:ro
     environment:
       PORT: ${port}
-      KEY: "${publicKey}"
-      # FILESYSTEM: /dev/sda1 # override the root partition / device for disk I/O stats`)
+      KEY: "${publicKey}"`)
+	}
+
+	function copyInstallCommand(port: string) {
+		copyToClipboard(
+			`curl -sL https://raw.githubusercontent.com/henrygd/beszel/main/supplemental/scripts/install-agent.sh -o install-agent.sh && chmod +x install-agent.sh && ./install-agent.sh -p ${port} -k "${publicKey}"`
+		)
 	}
 
 	async function handleSubmit(e: SubmitEvent) {
@@ -48,8 +55,8 @@ export function AddSystemButton({ className }: { className?: string }) {
 		data.users = pb.authStore.model!.id
 		try {
 			setOpen(false)
-			await pb.collection('systems').create(data)
-			navigate('/')
+			await pb.collection("systems").create(data)
+			navigate("/")
 			// console.log(record)
 		} catch (e) {
 			console.log(e)
@@ -61,88 +68,119 @@ export function AddSystemButton({ className }: { className?: string }) {
 			<DialogTrigger asChild>
 				<Button
 					variant="outline"
-					className={cn('flex gap-1 max-xs:h-[2.4rem]', className, isReadOnlyUser() && 'hidden')}
+					className={cn("flex gap-1 max-xs:h-[2.4rem]", className, isReadOnlyUser() && "hidden")}
 				>
-					<PlusIcon className="h-4 w-4 -ml-1" />
-					Add <span className="hidden xs:inline">System</span>
+					<PlusIcon className="h-4 w-4 -ms-1" />
+					<Trans>
+						Add <span className="hidden sm:inline">System</span>
+					</Trans>
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="w-[90%] sm:max-w-[425px] rounded-lg">
-				<DialogHeader>
-					<DialogTitle className="mb-2">Add New System</DialogTitle>
-					<DialogDescription>
-						The agent must be running on the system to connect. Copy the{' '}
-						<code className="bg-muted px-1 rounded-sm">docker-compose.yml</code> for the agent
-						below.
-					</DialogDescription>
-				</DialogHeader>
-				<form onSubmit={handleSubmit as any}>
-					<div className="grid gap-3 mt-1 mb-4">
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="name" className="text-right">
-								Name
-							</Label>
-							<Input id="name" name="name" className="col-span-3" required />
+			<DialogContent className="w-[90%] sm:max-w-[440px] rounded-lg">
+				<Tabs defaultValue="docker">
+					<DialogHeader>
+						<DialogTitle className="mb-2">
+							<Trans>Add New System</Trans>
+						</DialogTitle>
+						<TabsList className="grid w-full grid-cols-2">
+							<TabsTrigger value="docker">Docker</TabsTrigger>
+							<TabsTrigger value="binary">
+								<Trans>Binary</Trans>
+							</TabsTrigger>
+						</TabsList>
+					</DialogHeader>
+					{/* Docker */}
+					<TabsContent value="docker">
+						<DialogDescription className="mb-4 leading-normal">
+							<Trans>
+								The agent must be running on the system to connect. Copy the
+								<code className="bg-muted px-1 rounded-sm leading-3">docker-compose.yml</code> for the agent below.
+							</Trans>
+						</DialogDescription>
+					</TabsContent>
+					{/* Binary */}
+					<TabsContent value="binary">
+						<DialogDescription className="mb-4 leading-normal">
+							<Trans>
+								The agent must be running on the system to connect. Copy the installation command for the agent below.
+							</Trans>
+						</DialogDescription>
+					</TabsContent>
+					<form onSubmit={handleSubmit as any}>
+						<div className="grid gap-3 mt-1 mb-4">
+							<div className="grid grid-cols-4 items-center gap-4">
+								<Label htmlFor="name" className="text-end">
+									<Trans>Name</Trans>
+								</Label>
+								<Input id="name" name="name" className="col-span-3" required />
+							</div>
+							<div className="grid grid-cols-4 items-center gap-4">
+								<Label htmlFor="host" className="text-end">
+									<Trans>Host / IP</Trans>
+								</Label>
+								<Input id="host" name="host" className="col-span-3" required />
+							</div>
+							<div className="grid grid-cols-4 items-center gap-4">
+								<Label htmlFor="port" className="text-end">
+									<Trans>Port</Trans>
+								</Label>
+								<Input ref={port} name="port" id="port" defaultValue="45876" className="col-span-3" required />
+							</div>
+							<div className="grid grid-cols-4 items-center gap-4 relative">
+								<Label htmlFor="pkey" className="text-end whitespace-pre">
+									<Trans comment="Use 'Key' if your language requires many more characters">Public Key</Trans>
+								</Label>
+								<Input readOnly id="pkey" value={publicKey} className="col-span-3" required></Input>
+								<div
+									className={
+										"h-6 w-24 bg-gradient-to-r rtl:bg-gradient-to-l from-transparent to-background to-65% absolute end-1 pointer-events-none"
+									}
+								></div>
+								<TooltipProvider delayDuration={100}>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<Button
+												type="button"
+												variant={"link"}
+												className="absolute end-0"
+												onClick={() => copyToClipboard(publicKey)}
+											>
+												<Copy className="h-4 w-4 " />
+											</Button>
+										</TooltipTrigger>
+										<TooltipContent>
+											<p>
+												<Trans>Click to copy</Trans>
+											</p>
+										</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
+							</div>
 						</div>
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="host" className="text-right">
-								Host / IP
-							</Label>
-							<Input id="host" name="host" className="col-span-3" required />
-						</div>
-						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="port" className="text-right">
-								Port
-							</Label>
-							<Input
-								ref={port}
-								name="port"
-								id="port"
-								defaultValue="45876"
-								className="col-span-3"
-								required
-							/>
-						</div>
-						<div className="grid grid-cols-4 items-center gap-4 relative">
-							<Label htmlFor="pkey" className="text-right whitespace-pre">
-								Public Key
-							</Label>
-							<Input readOnly id="pkey" value={publicKey} className="col-span-3" required></Input>
-							<div
-								className={
-									'h-6 w-24 bg-gradient-to-r from-transparent to-background to-65% absolute right-1 pointer-events-none'
-								}
-							></div>
-							<TooltipProvider delayDuration={100}>
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											type="button"
-											variant={'link'}
-											className="absolute right-0"
-											onClick={() => copyToClipboard(publicKey)}
-										>
-											<Copy className="h-4 w-4 " />
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>
-										<p>Click to copy</p>
-									</TooltipContent>
-								</Tooltip>
-							</TooltipProvider>
-						</div>
-					</div>
-					<DialogFooter className="flex justify-end gap-2">
-						<Button
-							type="button"
-							variant={'ghost'}
-							onClick={() => copyDockerCompose(port.current.value)}
-						>
-							Copy docker compose
-						</Button>
-						<Button>Add system</Button>
-					</DialogFooter>
-				</form>
+						{/* Docker */}
+						<TabsContent value="docker">
+							<DialogFooter className="flex justify-end gap-2 sm:w-[calc(100%+20px)] sm:-ms-[20px]">
+								<Button type="button" variant={"ghost"} onClick={() => copyDockerCompose(port.current.value)}>
+									<Trans>Copy</Trans> docker compose
+								</Button>
+								<Button>
+									<Trans>Add system</Trans>
+								</Button>
+							</DialogFooter>
+						</TabsContent>
+						{/* Binary */}
+						<TabsContent value="binary">
+							<DialogFooter className="flex justify-end gap-2 sm:w-[calc(100%+20px)] sm:-ms-[20px]">
+								<Button type="button" variant={"ghost"} onClick={() => copyInstallCommand(port.current.value)}>
+									<Trans>Copy Linux command</Trans>
+								</Button>
+								<Button>
+									<Trans>Add system</Trans>
+								</Button>
+							</DialogFooter>
+						</TabsContent>
+					</form>
+				</Tabs>
 			</DialogContent>
 		</Dialog>
 	)

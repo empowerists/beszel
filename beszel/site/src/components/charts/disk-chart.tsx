@@ -1,6 +1,6 @@
-import { Area, AreaChart, CartesianGrid, YAxis } from 'recharts'
+import { Area, AreaChart, CartesianGrid, YAxis } from "recharts"
 
-import { ChartContainer, ChartTooltip, ChartTooltipContent, xAxis } from '@/components/ui/chart'
+import { ChartContainer, ChartTooltip, ChartTooltipContent, xAxis } from "@/components/ui/chart"
 import {
 	useYAxisWidth,
 	cn,
@@ -9,9 +9,11 @@ import {
 	toFixedFloat,
 	chartMargin,
 	getSizeAndUnit,
-} from '@/lib/utils'
-import { ChartData } from '@/types'
-import { memo } from 'react'
+} from "@/lib/utils"
+import { ChartData } from "@/types"
+import { memo } from "react"
+import { t } from "@lingui/macro"
+import { useLingui } from "@lingui/react"
 
 export default memo(function DiskChart({
 	dataKey,
@@ -23,17 +25,24 @@ export default memo(function DiskChart({
 	chartData: ChartData
 }) {
 	const { yAxisWidth, updateYAxisWidth } = useYAxisWidth()
+	const { _ } = useLingui()
+
+	if (chartData.systemStats.length === 0) {
+		return null
+	}
 
 	return (
 		<div>
 			<ChartContainer
-				className={cn('h-full w-full absolute aspect-auto bg-card opacity-0 transition-opacity', {
-					'opacity-100': yAxisWidth,
+				className={cn("h-full w-full absolute aspect-auto bg-card opacity-0 transition-opacity", {
+					"opacity-100": yAxisWidth,
 				})}
 			>
 				<AreaChart accessibilityLayer data={chartData.systemStats} margin={chartMargin}>
 					<CartesianGrid vertical={false} />
 					<YAxis
+						direction="ltr"
+						orientation={chartData.orientation}
 						className="tracking-tighter"
 						width={yAxisWidth}
 						domain={[0, diskSize]}
@@ -62,7 +71,7 @@ export default memo(function DiskChart({
 					/>
 					<Area
 						dataKey={dataKey}
-						name="Disk Usage"
+						name={_(t`Disk Usage`)}
 						type="monotoneX"
 						fill="hsl(var(--chart-4))"
 						fillOpacity={0.4}

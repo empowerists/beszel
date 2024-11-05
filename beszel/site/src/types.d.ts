@@ -1,9 +1,9 @@
-import { RecordModel } from 'pocketbase'
+import { RecordModel } from "pocketbase"
 
 export interface SystemRecord extends RecordModel {
 	name: string
 	host: string
-	status: 'up' | 'down' | 'paused' | 'pending'
+	status: "up" | "down" | "paused" | "pending"
 	port: string
 	info: SystemInfo
 	v: string
@@ -132,13 +132,13 @@ export interface AlertRecord extends RecordModel {
 	// user: string
 }
 
-export type ChartTimes = '1h' | '12h' | '24h' | '1w' | '30d'
+export type ChartTimes = "1h" | "12h" | "24h" | "1w" | "30d"
 
 export interface ChartTimeData {
 	[key: string]: {
-		type: '1m' | '10m' | '20m' | '120m' | '480m'
+		type: "1m" | "10m" | "20m" | "120m" | "480m"
 		expectedInterval: number
-		label: string
+		label: () => string
 		ticks?: number
 		format: (timestamp: string) => string
 		getOffset: (endTime: Date) => Date
@@ -155,13 +155,23 @@ export type UserSettings = {
 type ChartDataContainer = {
 	created: number | null
 } & {
-	[key: string]: key extends 'created' ? never : ContainerStats
+	[key: string]: key extends "created" ? never : ContainerStats
 }
 
 export interface ChartData {
 	systemStats: SystemStatsRecord[]
 	containerData: ChartDataContainer[]
+	orientation: "right" | "left"
 	ticks: number[]
 	domain: number[]
 	chartTime: ChartTimes
+}
+
+interface AlertInfo {
+	name: () => string
+	unit: string
+	icon: any
+	desc: () => string
+	single?: boolean
+	max?: number
 }

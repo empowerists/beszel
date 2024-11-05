@@ -8,7 +8,7 @@ import {
 	Server,
 	SettingsIcon,
 	UsersIcon,
-} from 'lucide-react'
+} from "lucide-react"
 
 import {
 	CommandDialog,
@@ -19,34 +19,36 @@ import {
 	CommandList,
 	CommandSeparator,
 	CommandShortcut,
-} from '@/components/ui/command'
-import { useEffect, useState } from 'react'
-import { useStore } from '@nanostores/react'
-import { $systems } from '@/lib/stores'
-import { isAdmin } from '@/lib/utils'
-import { navigate } from './router'
+} from "@/components/ui/command"
+import { useEffect } from "react"
+import { useStore } from "@nanostores/react"
+import { $systems } from "@/lib/stores"
+import { isAdmin } from "@/lib/utils"
+import { navigate } from "./router"
+import { Trans, t } from "@lingui/macro"
 
-export default function CommandPalette() {
-	const [open, setOpen] = useState(false)
+export default function CommandPalette({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
 	const systems = useStore($systems)
 
 	useEffect(() => {
 		const down = (e: KeyboardEvent) => {
-			if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+			if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault()
-				setOpen((open) => !open)
+				setOpen(!open)
 			}
 		}
 
-		document.addEventListener('keydown', down)
-		return () => document.removeEventListener('keydown', down)
-	}, [])
+		document.addEventListener("keydown", down)
+		return () => document.removeEventListener("keydown", down)
+	}, [open, setOpen])
 
 	return (
 		<CommandDialog open={open} onOpenChange={setOpen}>
-			<CommandInput placeholder="Search for systems or settings..." />
+			<CommandInput placeholder={t`Search for systems or settings...`} />
 			<CommandList>
-				<CommandEmpty>No results found.</CommandEmpty>
+				<CommandEmpty>
+					<Trans>No results found.</Trans>
+				</CommandEmpty>
 				{systems.length > 0 && (
 					<>
 						<CommandGroup>
@@ -58,7 +60,7 @@ export default function CommandPalette() {
 										setOpen(false)
 									}}
 								>
-									<Server className="mr-2 h-4 w-4" />
+									<Server className="me-2 h-4 w-4" />
 									<span>{system.name}</span>
 									<CommandShortcut>{system.host}</CommandShortcut>
 								</CommandItem>
@@ -67,106 +69,140 @@ export default function CommandPalette() {
 						<CommandSeparator className="mb-1.5" />
 					</>
 				)}
-				<CommandGroup heading="Pages / Settings">
+				<CommandGroup heading={t`Pages / Settings`}>
 					<CommandItem
-						keywords={['home']}
+						keywords={["home"]}
 						onSelect={() => {
-							navigate('/')
-							setOpen((open) => !open)
+							navigate("/")
+							setOpen(false)
 						}}
 					>
-						<LayoutDashboard className="mr-2 h-4 w-4" />
-						<span>Dashboard</span>
-						<CommandShortcut>Page</CommandShortcut>
+						<LayoutDashboard className="me-2 h-4 w-4" />
+						<span>
+							<Trans>Dashboard</Trans>
+						</span>
+						<CommandShortcut>
+							<Trans>Page</Trans>
+						</CommandShortcut>
 					</CommandItem>
 					<CommandItem
 						onSelect={() => {
-							navigate('/settings/general')
-							setOpen((open) => !open)
+							navigate("/settings/general")
+							setOpen(false)
 						}}
 					>
-						<SettingsIcon className="mr-2 h-4 w-4" />
-						<span>Settings</span>
-						<CommandShortcut>Settings</CommandShortcut>
+						<SettingsIcon className="me-2 h-4 w-4" />
+						<span>
+							<Trans>Settings</Trans>
+						</span>
+						<CommandShortcut>
+							<Trans>Settings</Trans>
+						</CommandShortcut>
 					</CommandItem>
 					<CommandItem
-						keywords={['alerts']}
+						keywords={["alerts"]}
 						onSelect={() => {
-							navigate('/settings/notifications')
-							setOpen((open) => !open)
+							navigate("/settings/notifications")
+							setOpen(false)
 						}}
 					>
-						<MailIcon className="mr-2 h-4 w-4" />
-						<span>Notification settings</span>
-						<CommandShortcut>Settings</CommandShortcut>
+						<MailIcon className="me-2 h-4 w-4" />
+						<span>
+							<Trans>Notifications</Trans>
+						</span>
+						<CommandShortcut>
+							<Trans>Settings</Trans>
+						</CommandShortcut>
 					</CommandItem>
 					<CommandItem
-						keywords={['github']}
+						keywords={["github"]}
 						onSelect={() => {
-							window.location.href = 'https://github.com/henrygd/beszel/blob/main/readme.md'
+							window.location.href = "https://github.com/henrygd/beszel/blob/main/readme.md"
 						}}
 					>
-						<Github className="mr-2 h-4 w-4" />
-						<span>Documentation</span>
+						<Github className="me-2 h-4 w-4" />
+						<span>
+							<Trans>Documentation</Trans>
+						</span>
 						<CommandShortcut>GitHub</CommandShortcut>
 					</CommandItem>
 				</CommandGroup>
 				{isAdmin() && (
 					<>
 						<CommandSeparator className="mb-1.5" />
-						<CommandGroup heading="Admin">
+						<CommandGroup heading={t`Admin`}>
 							<CommandItem
-								keywords={['pocketbase']}
+								keywords={["pocketbase"]}
 								onSelect={() => {
 									setOpen(false)
-									window.open('/_/', '_blank')
+									window.open("/_/", "_blank")
 								}}
 							>
-								<UsersIcon className="mr-2 h-4 w-4" />
-								<span>Users</span>
-								<CommandShortcut>Admin</CommandShortcut>
+								<UsersIcon className="me-2 h-4 w-4" />
+								<span>
+									<Trans>Users</Trans>
+								</span>
+								<CommandShortcut>
+									<Trans>Admin</Trans>
+								</CommandShortcut>
 							</CommandItem>
 							<CommandItem
 								onSelect={() => {
 									setOpen(false)
-									window.open('/_/#/logs', '_blank')
+									window.open("/_/#/logs", "_blank")
 								}}
 							>
-								<LogsIcon className="mr-2 h-4 w-4" />
-								<span>Logs</span>
-								<CommandShortcut>Admin</CommandShortcut>
+								<LogsIcon className="me-2 h-4 w-4" />
+								<span>
+									<Trans>Logs</Trans>
+								</span>
+								<CommandShortcut>
+									<Trans>Admin</Trans>
+								</CommandShortcut>
 							</CommandItem>
 							<CommandItem
 								onSelect={() => {
 									setOpen(false)
-									window.open('/_/#/settings/backups', '_blank')
+									window.open("/_/#/settings/backups", "_blank")
 								}}
 							>
-								<DatabaseBackupIcon className="mr-2 h-4 w-4" />
-								<span>Backups</span>
-								<CommandShortcut>Admin</CommandShortcut>
+								<DatabaseBackupIcon className="me-2 h-4 w-4" />
+								<span>
+									<Trans>Backups</Trans>
+								</span>
+								<CommandShortcut>
+									<Trans>Admin</Trans>
+								</CommandShortcut>
 							</CommandItem>
 							<CommandItem
-								keywords={['oauth', 'oicd']}
+								keywords={["oauth", "oicd"]}
 								onSelect={() => {
 									setOpen(false)
-									window.open('/_/#/settings/auth-providers', '_blank')
+									window.open("/_/#/settings/auth-providers", "_blank")
 								}}
 							>
-								<LockKeyholeIcon className="mr-2 h-4 w-4" />
-								<span>Auth Providers</span>
-								<CommandShortcut>Admin</CommandShortcut>
+								<LockKeyholeIcon className="me-2 h-4 w-4" />
+								<span>
+									<Trans>Auth Providers</Trans>
+								</span>
+								<CommandShortcut>
+									<Trans>Admin</Trans>
+								</CommandShortcut>
 							</CommandItem>
 							<CommandItem
-								keywords={['email']}
+								keywords={["email"]}
 								onSelect={() => {
 									setOpen(false)
-									window.open('/_/#/settings/mail', '_blank')
+									window.open("/_/#/settings/mail", "_blank")
 								}}
 							>
-								<MailIcon className="mr-2 h-4 w-4" />
-								<span>SMTP settings</span>
-								<CommandShortcut>Admin</CommandShortcut>
+								<MailIcon className="me-2 h-4 w-4" />
+								<span>
+									<Trans>SMTP settings</Trans>
+								</span>
+								<CommandShortcut>
+									<Trans>Admin</Trans>
+								</CommandShortcut>
 							</CommandItem>
 						</CommandGroup>
 					</>
