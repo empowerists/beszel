@@ -12,10 +12,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - image: empowerists/beszel
+          - image_name: ghcr.io/${{ github.repository_owner }}/beszel/beszel
             context: ./beszel
             dockerfile: ./beszel/dockerfile_Hub
-          - image: empowerists/beszel-agent
+          - image_name: ghcr.io/${{ github.repository_owner }}/beszel/beszel-agent
             context: ./beszel
             dockerfile: ./beszel/dockerfile_Agent
     permissions:
@@ -45,7 +45,7 @@ jobs:
         id: metadata
         uses: docker/metadata-action@v5
         with:
-          images: ${{ matrix.image }}
+          images: ${{ matrix.image_name }}
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -54,17 +54,16 @@ jobs:
 
       # Login to GitHub Container Registry
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@5176d81f87c23d6fc96624dfdbcd9f3830bbe445 # v6.5.0
+        uses: docker/build-push-action@v6
         with:
           context: '${{ matrix.context }}'
           file: ${{ matrix.dockerfile }}
@@ -72,4 +71,3 @@ jobs:
           push: ${{ github.ref_type == 'tag' }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
-
