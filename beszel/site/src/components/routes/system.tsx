@@ -1,12 +1,12 @@
 import { $systems, pb, $chartTime, $containerFilter, $userSettings, $direction } from "@/lib/stores"
-import { ChartData, ChartTimes, ContainerStatsRecord, SystemRecord, SystemStatsRecord } from "@/types"
+import { ChartData, ChartTimes, ContainerStatsRecord, GPUData, SystemRecord, SystemStatsRecord } from "@/types"
 import React, { lazy, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Card, CardHeader, CardTitle, CardDescription } from "../ui/card"
 import { useStore } from "@nanostores/react"
 import Spinner from "../spinner"
 import { ClockArrowUp, CpuIcon, GlobeIcon, LayoutGridIcon, MonitorIcon, XIcon } from "lucide-react"
 import ChartTimeSelect from "../charts/chart-time-select"
-import { chartTimeData, cn, getPbTimestamp, useLocalStorage } from "@/lib/utils"
+import { chartTimeData, cn, getPbTimestamp, getSizeAndUnit, toFixedFloat, useLocalStorage } from "@/lib/utils"
 import { Separator } from "../ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
 import { Button } from "../ui/button"
@@ -24,6 +24,7 @@ const MemChart = lazy(() => import("../charts/mem-chart"))
 const DiskChart = lazy(() => import("../charts/disk-chart"))
 const SwapChart = lazy(() => import("../charts/swap-chart"))
 const TemperatureChart = lazy(() => import("../charts/temperature-chart"))
+const GpuPowerChart = lazy(() => import("../charts/gpu-power-chart"))
 
 const cache = new Map<string, any>()
 
@@ -285,6 +286,7 @@ export default function SystemDetail({ name }: { name: string }) {
 
 	// if no data, show empty message
 	const dataEmpty = !chartLoading && chartData.systemStats.length === 0
+	const hasGpuData = Object.keys(systemStats.at(-1)?.stats.g ?? {}).length > 0
 
 	return (
 		<>
@@ -413,11 +415,7 @@ export default function SystemDetail({ name }: { name: string }) {
 					)}
 
 					<ChartCard empty={dataEmpty} grid={grid} title={t`Disk Usage`} description={t`Usage of root partition`}>
-						<DiskChart
-							chartData={chartData}
-							dataKey="stats.du"
-							diskSize={Math.round(systemStats.at(-1)?.stats.d ?? NaN)}
-						/>
+						<DiskChart chartData={chartData} dataKey="stats.du" diskSize={systemStats.at(-1)?.stats.d ?? NaN} />
 					</ChartCard>
 
 					<ChartCard
@@ -459,6 +457,7 @@ export default function SystemDetail({ name }: { name: string }) {
 						</div>
 					)}
 
+					{/* Swap chart */}
 					{(systemStats.at(-1)?.stats.su ?? 0) > 0 && (
 						<ChartCard
 							empty={dataEmpty}
@@ -470,6 +469,7 @@ export default function SystemDetail({ name }: { name: string }) {
 						</ChartCard>
 					)}
 
+					{/* Temperature chart */}
 					{systemStats.at(-1)?.stats.t && (
 						<ChartCard
 							empty={dataEmpty}
@@ -480,7 +480,57 @@ export default function SystemDetail({ name }: { name: string }) {
 							<TemperatureChart chartData={chartData} />
 						</ChartCard>
 					)}
+
+					{/* GPU power draw chart */}
+					{hasGpuData && (
+						<ChartCard
+							empty={dataEmpty}
+							grid={grid}
+							title="GPU Power Draw"
+							description="Average power consumption of GPUs"
+						>
+							<GpuPowerChart chartData={chartData} />
+						</ChartCard>
+					)}
 				</div>
+
+				{/* GPU charts */}
+				{hasGpuData && (
+					<div className="grid xl:grid-cols-2 gap-4">
+						{Object.keys(systemStats.at(-1)?.stats.g ?? {}).map((id) => {
+							const gpu = systemStats.at(-1)?.stats.g?.[id] as GPUData
+							return (
+								<div key={id} className="contents">
+									<ChartCard
+										empty={dataEmpty}
+										grid={grid}
+										title={`${gpu.n} ${t`Usage`}`}
+										description={`Average utilization of ${gpu.n}`}
+									>
+										<AreaChartDefault chartData={chartData} chartName={`g.${id}.u`} unit="%" />
+									</ChartCard>
+									<ChartCard
+										empty={dataEmpty}
+										grid={grid}
+										title={`${gpu.n} VRAM`}
+										description={t`Precise utilization at the recorded time`}
+									>
+										<AreaChartDefault
+											chartData={chartData}
+											chartName={`g.${id}.mu`}
+											unit=" MB"
+											max={gpu.mt}
+											tickFormatter={(value) => {
+												const { v, u } = getSizeAndUnit(value, false)
+												return toFixedFloat(v, 1) + u
+											}}
+										/>
+									</ChartCard>
+								</div>
+							)
+						})}
+					</div>
+				)}
 
 				{/* extra filesystem charts */}
 				{Object.keys(systemStats.at(-1)?.stats.efs ?? {}).length > 0 && (
@@ -497,7 +547,7 @@ export default function SystemDetail({ name }: { name: string }) {
 										<DiskChart
 											chartData={chartData}
 											dataKey={`stats.efs.${extraFsName}.du`}
-											diskSize={Math.round(systemStats.at(-1)?.stats.efs?.[extraFsName].d ?? NaN)}
+											diskSize={systemStats.at(-1)?.stats.efs?.[extraFsName].d ?? NaN}
 										/>
 									</ChartCard>
 									<ChartCard
