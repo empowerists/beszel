@@ -1,19 +1,32 @@
 package migrations
 
 import (
-	"github.com/pocketbase/dbx"
-	"github.com/pocketbase/pocketbase/daos"
+	"log"
+
+	"github.com/pocketbase/pocketbase/core"
 	m "github.com/pocketbase/pocketbase/migrations"
+	"github.com/pocketbase/pocketbase/tools/security"
+)
+
+var (
+	TempAdminEmail = "_@b.b"
 )
 
 func init() {
-	m.Register(func(db dbx.Builder) error {
-		dao := daos.New(db)
-
-		settings, _ := dao.FindSettings()
+	m.Register(func(app core.App) error {
+		// initial settings
+		settings := app.Settings()
 		settings.Meta.AppName = "Beszel"
 		settings.Meta.HideControls = true
-
-		return dao.SaveSettings(settings)
+		if err := app.Save(settings); err != nil {
+			log.Println("failed to save settings", err)
+			return err
+		}
+		// create superuser
+		collection, _ := app.FindCollectionByNameOrId(core.CollectionNameSuperusers)
+		user := core.NewRecord(collection)
+		user.SetEmail(TempAdminEmail)
+		user.SetPassword(security.RandomString(12))
+		return app.Save(user)
 	}, nil)
 }

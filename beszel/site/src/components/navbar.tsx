@@ -2,7 +2,6 @@ import { useState, lazy, Suspense } from "react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import {
 	DatabaseBackupIcon,
-	LockKeyholeIcon,
 	LogOutIcon,
 	LogsIcon,
 	SearchIcon,
@@ -58,7 +57,7 @@ export default function Navbar() {
 						</button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align={isReadOnlyUser() ? "end" : "center"} className="min-w-44">
-						<DropdownMenuLabel>{pb.authStore.model?.email}</DropdownMenuLabel>
+						<DropdownMenuLabel>{pb.authStore.record?.email}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
 							{isAdmin() && (
@@ -92,14 +91,6 @@ export default function Navbar() {
 											<DatabaseBackupIcon className="me-2.5 h-4 w-4" />
 											<span>
 												<Trans>Backups</Trans>
-											</span>
-										</a>
-									</DropdownMenuItem>
-									<DropdownMenuItem asChild>
-										<a href="/_/#/settings/auth-providers" target="_blank">
-											<LockKeyholeIcon className="me-2.5 h-4 w-4" />
-											<span>
-												<Trans>Auth Providers</Trans>
 											</span>
 										</a>
 									</DropdownMenuItem>
