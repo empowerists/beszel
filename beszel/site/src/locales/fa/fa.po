@@ -5,46 +5,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: vi\n"
+"Language: fa\n"
 "Project-Id-Version: beszel\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-12-17 21:36\n"
 "Last-Translator: \n"
-"Language-Team: Vietnamese\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Team: Persian\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Crowdin-Project: beszel\n"
 "X-Crowdin-Project-ID: 733311\n"
-"X-Crowdin-Language: vi\n"
+"X-Crowdin-Language: fa\n"
 "X-Crowdin-File: /main/beszel/site/src/locales/en/en.po\n"
 "X-Crowdin-File-ID: 16\n"
 
 #: src/components/routes/system.tsx:250
 msgid "{0, plural, one {# day} other {# days}}"
-msgstr "{0, plural, one {# ngày} other {# ngày}}"
+msgstr "{0, plural, one {# روز} other {# روز}}"
 
 #: src/components/routes/system.tsx:248
 msgid "{hours, plural, one {# hour} other {# hours}}"
-msgstr "{hours, plural, one {# giờ} other {# giờ}}"
+msgstr "{hours, plural, one {# ساعت} other {# ساعت}}"
 
 #: src/lib/utils.ts:139
 msgid "1 hour"
-msgstr "1 giờ"
+msgstr "۱ ساعت"
 
 #: src/lib/utils.ts:162
 msgid "1 week"
-msgstr "1 tuần"
+msgstr "۱ هفته"
 
 #: src/lib/utils.ts:147
 msgid "12 hours"
-msgstr "12 giờ"
+msgstr "۱۲ ساعت"
 
 #: src/lib/utils.ts:155
 msgid "24 hours"
-msgstr "24 giờ"
+msgstr "۲۴ ساعت"
 
 #: src/lib/utils.ts:170
 msgid "30 days"
-msgstr "30 ngày"
+msgstr "۳۰ روز"
 
 #. Table column
 #: src/components/systems-table/systems-table.tsx:227
@@ -52,32 +52,32 @@ msgstr "30 ngày"
 #: src/components/systems-table/systems-table.tsx:455
 #: src/components/systems-table/systems-table.tsx:465
 msgid "Actions"
-msgstr "Hành động"
+msgstr "عملیات"
 
 #: src/components/routes/home.tsx:61
 msgid "Active Alerts"
-msgstr "Cảnh báo hoạt động"
+msgstr " هشدارهای فعال"
 
 #: src/components/add-system.tsx:78
 msgid "Add <0>System</0>"
-msgstr "Thêm <0>Hệ thống</0>"
+msgstr "افزودن <0>سیستم</0>"
 
 #: src/components/add-system.tsx:87
 msgid "Add New System"
-msgstr "Thêm Hệ thống Mới"
+msgstr "افزودن سیستم جدید"
 
 #: src/components/add-system.tsx:165
 #: src/components/add-system.tsx:176
 msgid "Add system"
-msgstr "Thêm hệ thống"
+msgstr "افزودن سیستم"
 
 #: src/components/routes/settings/notifications.tsx:156
 msgid "Add URL"
-msgstr "Thêm URL"
+msgstr "افزودن آدرس اینترنتی"
 
 #: src/components/routes/settings/general.tsx:81
 msgid "Adjust display options for charts."
-msgstr "Điều chỉnh tùy chọn hiển thị cho biểu đồ."
+msgstr "تنظیم گزینه‌های نمایش برای نمودارها."
 
 #: src/components/command-palette.tsx:132
 #: src/components/command-palette.tsx:145
@@ -85,548 +85,548 @@ msgstr "Điều chỉnh tùy chọn hiển thị cho biểu đồ."
 #: src/components/command-palette.tsx:173
 #: src/components/command-palette.tsx:188
 msgid "Admin"
-msgstr "Quản trị viên"
+msgstr "مدیر"
 
 #: src/components/systems-table/systems-table.tsx:201
 msgid "Agent"
-msgstr "Tác nhân"
+msgstr "عامل"
 
 #: src/components/alerts/alert-button.tsx:32
 #: src/components/alerts/alert-button.tsx:68
 msgid "Alerts"
-msgstr "Cảnh báo"
+msgstr "هشدارها"
 
 #: src/components/alerts/alert-button.tsx:88
 #: src/components/systems-table/systems-table.tsx:266
 msgid "All Systems"
-msgstr "Tất cả Hệ thống"
+msgstr "همه سیستم‌ها"
 
 #: src/components/systems-table/systems-table.tsx:570
 msgid "Are you sure you want to delete {name}?"
-msgstr "Bạn có chắc chắn muốn xóa {name} không?"
+msgstr "آیا مطمئن هستید که می‌خواهید {name} را حذف کنید؟"
 
 #: src/components/copy-to-clipboard.tsx:16
 msgid "Automatic copy requires a secure context."
-msgstr "Sao chép tự động yêu cầu một ngữ cảnh an toàn."
+msgstr "کپی خودکار نیاز به یک زمینه امن دارد."
 
 #: src/components/routes/system.tsx:625
 msgid "Average"
-msgstr "Trung bình"
+msgstr "میانگین"
 
 #: src/components/routes/system.tsx:396
 msgid "Average CPU utilization of containers"
-msgstr "Sử dụng CPU trung bình của các container"
+msgstr "میانگین استفاده از CPU کانتینرها"
 
 #: src/components/alerts/alerts-system.tsx:206
 msgid "Average exceeds <0>{value}{0}</0>"
-msgstr "Trung bình vượt quá <0>{value}{0}</0>"
+msgstr ""
 
 #: src/components/routes/system.tsx:497
 msgid "Average power consumption of GPUs"
-msgstr ""
+msgstr "میانگین مصرف برق پردازنده‌های گرافیکی"
 
 #: src/components/routes/system.tsx:385
 msgid "Average system-wide CPU utilization"
-msgstr "Sử dụng CPU trung bình toàn hệ thống"
+msgstr "میانگین استفاده از CPU در کل سیستم"
 
 #: src/components/routes/system.tsx:515
 msgid "Average utilization of {0}"
-msgstr ""
+msgstr "میانگین استفاده از {0}"
 
 #: src/components/command-palette.tsx:170
 #: src/components/navbar.tsx:93
 msgid "Backups"
-msgstr "Sao lưu"
+msgstr "پشتیبان‌گیری‌ها"
 
 #: src/components/routes/system.tsx:441
 #: src/lib/utils.ts:307
 msgid "Bandwidth"
-msgstr "Băng thông"
+msgstr "پهنای باند"
 
 #: src/components/login/auth-form.tsx:289
 msgid "Beszel supports OpenID Connect and many OAuth2 authentication providers."
-msgstr "Beszel hỗ trợ OpenID Connect và nhiều nhà cung cấp xác thực OAuth2."
+msgstr "بِزل از OpenID Connect و بسیاری از ارائه‌دهندگان احراز هویت OAuth2 پشتیبانی می‌کند."
 
 #: src/components/routes/settings/notifications.tsx:127
 msgid "Beszel uses <0>Shoutrrr</0> to integrate with popular notification services."
-msgstr "Beszel sử dụng <0>Shoutrrr</0> để tích hợp với các dịch vụ thông báo phổ biến."
+msgstr "بِزل از <0>Shoutrrr</0> برای ادغام با سرویس‌های اطلاع‌رسانی محبوب استفاده می‌کند."
 
 #: src/components/add-system.tsx:92
 msgid "Binary"
-msgstr "Nhị phân"
+msgstr "دودویی"
 
 #: src/components/charts/mem-chart.tsx:89
 msgid "Cache / Buffers"
-msgstr "Bộ nhớ đệm / Bộ đệm"
+msgstr "حافظه پنهان / بافرها"
 
 #: src/components/systems-table/systems-table.tsx:581
 msgid "Cancel"
-msgstr "Hủy bỏ"
+msgstr "لغو"
 
 #: src/components/routes/settings/config-yaml.tsx:68
 msgid "Caution - potential data loss"
-msgstr "Cẩn thận - có thể mất dữ liệu"
+msgstr "احتیاط - احتمال از دست رفتن داده‌ها"
 
 #: src/components/routes/settings/general.tsx:36
 msgid "Change general application options."
-msgstr "Thay đổi các tùy chọn ứng dụng chung."
+msgstr "تغییر گزینه‌های کلی برنامه."
 
 #: src/components/routes/settings/general.tsx:78
 msgid "Chart options"
-msgstr "Tùy chọn biểu đồ"
+msgstr "گزینه‌های نمودار"
 
 #: src/components/login/forgot-pass-form.tsx:34
 msgid "Check {email} for a reset link."
-msgstr "Kiểm tra {email} để lấy liên kết đặt lại."
+msgstr "ایمیل {email} خود را برای لینک بازنشانی بررسی کنید."
 
 #: src/components/routes/settings/layout.tsx:40
 msgid "Check logs for more details."
-msgstr "Kiểm tra nhật ký để biết thêm chi tiết."
+msgstr "برای جزئیات بیشتر، لاگ‌ها را بررسی کنید."
 
 #: src/components/routes/settings/notifications.tsx:183
 msgid "Check your notification service"
-msgstr "Kiểm tra dịch vụ thông báo của bạn"
+msgstr "سرویس اطلاع‌رسانی خود را بررسی کنید"
 
 #: src/components/add-system.tsx:151
 msgid "Click to copy"
-msgstr "Nhấp để sao chép"
+msgstr "برای کپی کردن کلیک کنید"
 
 #: src/components/login/forgot-pass-form.tsx:83
 #: src/components/login/forgot-pass-form.tsx:89
 msgid "Command line instructions"
-msgstr "Hướng dẫn dòng lệnh"
+msgstr "دستورالعمل‌های خط فرمان"
 
 #: src/components/routes/settings/notifications.tsx:77
 msgid "Configure how you receive alert notifications."
-msgstr "Cấu hình cách bạn nhận thông báo cảnh báo."
+msgstr "نحوه دریافت هشدارهای اطلاع‌رسانی را پیکربندی کنید."
 
 #: src/components/login/auth-form.tsx:165
 #: src/components/login/auth-form.tsx:170
 msgid "Confirm password"
-msgstr "Xác nhận mật khẩu"
+msgstr "تأیید رمز عبور"
 
 #: src/components/systems-table/systems-table.tsx:587
 msgid "Continue"
-msgstr "Tiếp tục"
+msgstr "ادامه"
 
 #: src/lib/utils.ts:25
 msgid "Copied to clipboard"
-msgstr "Đã sao chép vào clipboard"
+msgstr "در کلیپ‌بورد کپی شد"
 
 #: src/components/add-system.tsx:162
 msgid "Copy"
-msgstr "Sao chép"
+msgstr "کپی"
 
 #: src/components/systems-table/systems-table.tsx:556
 msgid "Copy host"
-msgstr "Sao chép máy chủ"
+msgstr "کپی میزبان"
 
 #: src/components/add-system.tsx:173
 msgid "Copy Linux command"
-msgstr "Sao chép lệnh Linux"
+msgstr "کپی دستور لینوکس"
 
 #: src/components/copy-to-clipboard.tsx:13
 msgid "Copy text"
-msgstr "Sao chép văn bản"
+msgstr "کپی متن"
 
 #: src/components/systems-table/systems-table.tsx:157
 msgid "CPU"
-msgstr "CPU"
+msgstr "پردازنده"
 
 #: src/components/charts/area-chart.tsx:56
 #: src/components/routes/system.tsx:384
 #: src/lib/utils.ts:289
 msgid "CPU Usage"
-msgstr "Sử dụng CPU"
+msgstr "میزان استفاده از پردازنده"
 
 #: src/components/login/auth-form.tsx:191
 msgid "Create account"
-msgstr "Tạo tài khoản"
+msgstr "ایجاد حساب کاربری"
 
 #. Dark theme
 #: src/components/mode-toggle.tsx:21
 msgid "Dark"
-msgstr "Tối"
+msgstr "تیره"
 
 #: src/components/command-palette.tsx:81
 #: src/components/routes/home.tsx:34
 msgid "Dashboard"
-msgstr "Bảng điều khiển"
+msgstr "داشبورد"
 
 #: src/components/routes/settings/general.tsx:85
 msgid "Default time period"
-msgstr "Thời gian mặc định"
+msgstr "بازه زمانی پیش‌فرض"
 
 #: src/components/systems-table/systems-table.tsx:562
 msgid "Delete"
-msgstr "Xóa"
+msgstr "حذف"
 
 #: src/components/systems-table/systems-table.tsx:173
 msgid "Disk"
-msgstr "Đĩa"
+msgstr "دیسک"
 
 #: src/components/routes/system.tsx:431
 msgid "Disk I/O"
-msgstr "Đĩa I/O"
+msgstr "ورودی/خروجی دیسک"
 
 #: src/components/charts/disk-chart.tsx:79
 #: src/components/routes/system.tsx:424
 #: src/lib/utils.ts:301
 msgid "Disk Usage"
-msgstr "Sử dụng Đĩa"
+msgstr "میزان استفاده از دیسک"
 
 #: src/components/routes/system.tsx:552
 msgid "Disk usage of {extraFsName}"
-msgstr "Sử dụng đĩa của {extraFsName}"
+msgstr "میزان استفاده از دیسک {extraFsName}"
 
 #: src/components/routes/system.tsx:395
 msgid "Docker CPU Usage"
-msgstr "Sử dụng CPU Docker"
+msgstr "میزان استفاده از CPU داکر"
 
 #: src/components/routes/system.tsx:416
 msgid "Docker Memory Usage"
-msgstr "Sử dụng Bộ nhớ Docker"
+msgstr "میزان استفاده از حافظه داکر"
 
 #: src/components/routes/system.tsx:457
 msgid "Docker Network I/O"
-msgstr "Mạng I/O Docker"
+msgstr "ورودی/خروجی شبکه داکر"
 
 #: src/components/command-palette.tsx:124
 msgid "Documentation"
-msgstr "Tài liệu"
+msgstr "مستندات"
 
 #: src/components/login/auth-form.tsx:128
 #: src/components/login/forgot-pass-form.tsx:53
 msgid "Email"
-msgstr "Email"
+msgstr "ایمیل"
 
 #: src/components/routes/settings/notifications.tsx:91
 msgid "Email notifications"
-msgstr "Thông báo email"
+msgstr "اعلان‌های ایمیلی"
 
 #: src/components/login/login.tsx:38
 msgid "Enter email address to reset password"
-msgstr "Nhập địa chỉ email để đặt lại mật khẩu"
+msgstr "آدرس ایمیل را برای بازنشانی رمز عبور وارد کنید"
 
 #: src/components/routes/settings/notifications.tsx:111
 msgid "Enter email address..."
-msgstr "Nhập địa chỉ email..."
+msgstr "آدرس ایمیل را وارد کنید..."
 
 #: src/components/login/auth-form.tsx:232
 #: src/components/routes/settings/config-yaml.tsx:28
 #: src/components/routes/settings/notifications.tsx:187
 msgid "Error"
-msgstr "Lỗi"
+msgstr "خطا"
 
 #: src/components/routes/home.tsx:80
 msgid "Exceeds {0}{1} in last {2, plural, one {# minute} other {# minutes}}"
-msgstr "Vượt quá {0}{1} trong {2, plural, one {# phút} other {# phút}} qua"
+msgstr "در {2, plural, one {# دقیقه} other {# دقیقه}} گذشته از {0}{1} بیشتر است"
 
 #: src/components/routes/settings/config-yaml.tsx:72
 msgid "Existing systems not defined in <0>config.yml</0> will be deleted. Please make regular backups."
-msgstr "Các hệ thống hiện có không được định nghĩa trong <0>config.yml</0> sẽ bị xóa. Vui lòng sao lưu thường xuyên."
+msgstr "سیستم‌های موجود که در <0>config.yml</0> تعریف نشده‌اند حذف خواهند شد. لطفاً به طور منظم پشتیبان‌گیری کنید."
 
 #: src/components/routes/settings/config-yaml.tsx:93
 msgid "Export configuration"
-msgstr "Xuất cấu hình"
+msgstr "خارج کردن پیکربندی"
 
 #: src/components/routes/settings/config-yaml.tsx:48
 msgid "Export your current systems configuration."
-msgstr "Xuất cấu hình hệ thống hiện tại của bạn."
+msgstr "پیکربندی سیستم‌های فعلی خود را خارج کنید."
 
 #: src/lib/utils.ts:38
 msgid "Failed to authenticate"
-msgstr "Xác thực thất bại"
+msgstr "احراز هویت ناموفق بود"
 
 #: src/components/routes/settings/layout.tsx:39
 #: src/components/routes/settings/notifications.tsx:62
 msgid "Failed to save settings"
-msgstr "Lưu cài đặt thất bại"
+msgstr "ذخیره تنظیمات ناموفق بود"
 
 #: src/components/routes/settings/notifications.tsx:188
 msgid "Failed to send test notification"
-msgstr "Gửi thông báo thử nghiệm thất bại"
+msgstr "ارسال اعلان آزمایشی ناموفق بود"
 
 #: src/components/alerts/alerts-system.tsx:24
 msgid "Failed to update alert"
-msgstr "Cập nhật cảnh báo thất bại"
+msgstr "به‌روزرسانی هشدار ناموفق بود"
 
 #: src/components/routes/system.tsx:596
 #: src/components/systems-table/systems-table.tsx:273
 msgid "Filter..."
-msgstr "Lọc..."
+msgstr "فیلتر..."
 
 #: src/components/alerts/alerts-system.tsx:227
 msgid "For <0>{min}</0> {min, plural, one {minute} other {minutes}}"
-msgstr "Trong <0>{min}</0> {min, plural, one {phút} other {phút}}"
+msgstr "برای <0>{min}</0> {min, plural, one {دقیقه} other {دقیقه}}"
 
 #: src/components/login/auth-form.tsx:313
 msgid "Forgot password?"
-msgstr "Quên mật khẩu?"
+msgstr "رمز عبور را فراموش کرده‌اید؟"
 
 #. Context: General settings
 #: src/components/routes/settings/general.tsx:33
 #: src/components/routes/settings/layout.tsx:51
 msgid "General"
-msgstr "Chung"
+msgstr "عمومی"
 
 #: src/components/routes/system.tsx:496
 msgid "GPU Power Draw"
-msgstr ""
+msgstr "مصرف برق پردازنده گرافیکی"
 
 #: src/components/systems-table/systems-table.tsx:300
 msgid "Grid"
-msgstr "Lưới"
+msgstr "جدول"
 
 #: src/components/add-system.tsx:120
 msgid "Host / IP"
-msgstr "Máy chủ / IP"
+msgstr "میزبان / IP"
 
 #: src/components/login/forgot-pass-form.tsx:93
 msgid "If you've lost the password to your admin account, you may reset it using the following command."
-msgstr "Nếu bạn đã mất mật khẩu cho tài khoản quản trị viên của mình, bạn có thể đặt lại bằng cách sử dụng lệnh sau."
+msgstr "اگر رمز عبور حساب مدیر خود را گم کرده‌اید، می‌توانید آن را با استفاده از دستور زیر بازنشانی کنید."
 
 #: src/components/login/auth-form.tsx:16
 msgid "Invalid email address."
-msgstr "Địa chỉ email không hợp lệ."
+msgstr "آدرس ایمیل نامعتبر است."
 
 #. Linux kernel
 #: src/components/routes/system.tsx:262
 msgid "Kernel"
-msgstr "Nhân"
+msgstr "هسته"
 
 #: src/components/routes/settings/general.tsx:45
 msgid "Language"
-msgstr "Ngôn ngữ"
+msgstr "زبان"
 
 #: src/components/systems-table/systems-table.tsx:286
 msgid "Layout"
-msgstr "Bố cục"
+msgstr "طرح‌بندی"
 
 #. Light theme
 #: src/components/mode-toggle.tsx:16
 msgid "Light"
-msgstr "Sáng"
+msgstr "روشن"
 
 #: src/components/navbar.tsx:104
 msgid "Log Out"
-msgstr "Đăng xuất"
+msgstr "خروج"
 
 #: src/components/login/login.tsx:19
 msgid "Login"
-msgstr "Đăng nhập"
+msgstr "ورود"
 
 #: src/components/login/auth-form.tsx:34
 #: src/components/login/forgot-pass-form.tsx:15
 msgid "Login attempt failed"
-msgstr "Nỗ lực đăng nhập thất bại"
+msgstr "تلاش برای ورود ناموفق بود"
 
 #: src/components/command-palette.tsx:156
 #: src/components/navbar.tsx:85
 msgid "Logs"
-msgstr "Nhật ký"
+msgstr "لاگ‌ها"
 
 #: src/components/routes/settings/notifications.tsx:80
 msgid "Looking instead for where to create alerts? Click the bell <0/> icons in the systems table."
-msgstr "Thay vào đó, bạn đang tìm nơi để tạo cảnh báo? Nhấp vào biểu tượng chuông <0/> trong bảng hệ thống."
+msgstr "به دنبال جایی برای ایجاد هشدار هستید؟ روی آیکون‌های زنگ <0/> در جدول سیستم‌ها کلیک کنید."
 
 #: src/components/routes/settings/layout.tsx:85
 msgid "Manage display and notification preferences."
-msgstr "Quản lý tùy chọn hiển thị và thông báo."
+msgstr "مدیریت تنظیمات نمایش و اعلان‌ها."
 
 #. Chart select field. Please try to keep this short.
 #: src/components/routes/system.tsx:628
 msgid "Max 1 min"
-msgstr "Tối đa 1 phút"
+msgstr "حداکثر ۱ دقیقه"
 
 #: src/components/systems-table/systems-table.tsx:165
 msgid "Memory"
-msgstr "Bộ nhớ"
+msgstr "حافظه"
 
 #: src/components/routes/system.tsx:406
 #: src/lib/utils.ts:295
 msgid "Memory Usage"
-msgstr "Sử dụng Bộ nhớ"
+msgstr "میزان استفاده از حافظه"
 
 #: src/components/routes/system.tsx:417
 msgid "Memory usage of docker containers"
-msgstr "Sử dụng bộ nhớ của các container Docker"
+msgstr "میزان استفاده از حافظه کانتینرهای داکر"
 
 #: src/components/add-system.tsx:116
 msgid "Name"
-msgstr "Tên"
+msgstr "نام"
 
 #: src/components/systems-table/systems-table.tsx:181
 msgid "Net"
-msgstr "Mạng"
+msgstr "شبکه"
 
 #: src/components/routes/system.tsx:458
 msgid "Network traffic of docker containers"
-msgstr "Lưu lượng mạng của các container Docker"
+msgstr "ترافیک شبکه کانتینرهای داکر"
 
 #: src/components/routes/system.tsx:443
 msgid "Network traffic of public interfaces"
-msgstr "Lưu lượng mạng của các giao diện công cộng"
+msgstr "ترافیک شبکه رابط‌های عمومی"
 
 #: src/components/command-palette.tsx:49
 msgid "No results found."
-msgstr "Không tìm thấy kết quả."
+msgstr "هیچ نتیجه‌ای یافت نشد."
 
 #: src/components/systems-table/systems-table.tsx:421
 #: src/components/systems-table/systems-table.tsx:494
 msgid "No systems found."
-msgstr "Không tìm thấy hệ thống."
+msgstr "هیچ سیستمی یافت نشد."
 
 #: src/components/command-palette.tsx:110
 #: src/components/routes/settings/layout.tsx:56
 #: src/components/routes/settings/notifications.tsx:74
 msgid "Notifications"
-msgstr "Thông báo"
+msgstr "اعلان‌ها"
 
 #: src/components/login/auth-form.tsx:284
 msgid "OAuth 2 / OIDC support"
-msgstr "Hỗ trợ OAuth 2 / OIDC"
+msgstr "پشتیبانی از OAuth 2 / OIDC"
 
 #: src/components/routes/settings/config-yaml.tsx:61
 msgid "On each restart, systems in the database will be updated to match the systems defined in the file."
-msgstr "Mỗi khi khởi động lại, các hệ thống trong cơ sở dữ liệu sẽ được cập nhật để khớp với các hệ thống được định nghĩa trong tệp."
+msgstr "در هر بار راه‌اندازی مجدد، سیستم‌های موجود در پایگاه داده با سیستم‌های تعریف شده در فایل مطابقت داده می‌شوند."
 
 #: src/components/systems-table/systems-table.tsx:528
 msgid "Open menu"
-msgstr "Mở menu"
+msgstr "باز کردن منو"
 
 #: src/components/login/auth-form.tsx:203
 msgid "Or continue with"
-msgstr "Hoặc tiếp tục với"
+msgstr "یا ادامه با"
 
 #: src/components/alerts/alert-button.tsx:109
 msgid "Overwrite existing alerts"
-msgstr "Ghi đè các cảnh báo hiện có"
+msgstr "بازنویسی هشدارهای موجود"
 
 #: src/components/command-palette.tsx:84
 msgid "Page"
-msgstr "Trang"
+msgstr "صفحه"
 
 #: src/components/command-palette.tsx:71
 msgid "Pages / Settings"
-msgstr "Trang / Cài đặt"
+msgstr "صفحات / تنظیمات"
 
 #: src/components/login/auth-form.tsx:147
 #: src/components/login/auth-form.tsx:152
 msgid "Password"
-msgstr "Mật khẩu"
+msgstr "رمز عبور"
 
 #: src/components/login/auth-form.tsx:17
 msgid "Password must be at least 8 characters."
-msgstr "Mật khẩu phải có ít nhất 8 ký tự."
+msgstr "رمز عبور باید حداقل ۸ کاراکتر باشد."
 
 #: src/components/login/forgot-pass-form.tsx:33
 msgid "Password reset request received"
-msgstr "Yêu cầu đặt lại mật khẩu đã được nhận"
+msgstr "درخواست بازنشانی رمز عبور دریافت شد"
 
 #: src/components/systems-table/systems-table.tsx:550
 msgid "Pause"
-msgstr "Tạm dừng"
+msgstr "توقف"
 
 #: src/components/routes/settings/notifications.tsx:95
 msgid "Please <0>configure an SMTP server</0> to ensure alerts are delivered."
-msgstr "Vui lòng <0>cấu hình máy chủ SMTP</0> để đảm bảo cảnh báo được gửi đi."
+msgstr "لطفاً برای اطمینان از تحویل هشدارها، یک <0>سرور SMTP پیکربندی کنید</0>."
 
 #: src/components/alerts/alerts-system.tsx:25
 msgid "Please check logs for more details."
-msgstr "Vui lòng kiểm tra nhật ký để biết thêm chi tiết."
+msgstr "لطفاً برای جزئیات بیشتر، لاگ‌ها را بررسی کنید."
 
 #: src/components/login/auth-form.tsx:35
 #: src/components/login/forgot-pass-form.tsx:16
 msgid "Please check your credentials and try again"
-msgstr "Vui lòng kiểm tra thông tin đăng nhập của bạn và thử lại"
+msgstr "لطفاً اعتبارنامه‌های خود را بررسی کرده و دوباره تلاش کنید."
 
 #: src/components/login/login.tsx:36
 msgid "Please create an admin account"
-msgstr "Vui lòng tạo một tài khoản quản trị viên"
+msgstr "لطفاً یک حساب مدیر ایجاد کنید"
 
 #: src/components/login/auth-form.tsx:233
 msgid "Please enable pop-ups for this site"
-msgstr "Vui lòng bật cửa sổ bật lên cho trang web này"
+msgstr "لطفاً پنجره‌های بازشو را برای این سایت فعال کنید"
 
 #: src/lib/utils.ts:39
 msgid "Please log in again"
-msgstr "Vui lòng đăng nhập lại"
+msgstr "لطفاً دوباره وارد شوید"
 
 #: src/components/login/auth-form.tsx:292
 msgid "Please see <0>the documentation</0> for instructions."
-msgstr "Vui lòng xem <0>tài liệu</0> để biết hướng dẫn."
+msgstr "لطفاً برای دستورالعمل‌ها به <0>مستندات</0> مراجعه کنید."
 
 #: src/components/login/login.tsx:40
 msgid "Please sign in to your account"
-msgstr "Vui lòng đăng nhập vào tài khoản của bạn"
+msgstr "لطفاً به حساب کاربری خود وارد شوید"
 
 #: src/components/add-system.tsx:124
 msgid "Port"
-msgstr "Cổng"
+msgstr "پورت"
 
 #: src/components/routes/system.tsx:407
 #: src/components/routes/system.tsx:523
 msgid "Precise utilization at the recorded time"
-msgstr "Sử dụng chính xác tại thời điểm ghi nhận"
+msgstr "میزان دقیق استفاده در زمان ثبت شده"
 
 #: src/components/routes/settings/general.tsx:58
 msgid "Preferred Language"
-msgstr "Ngôn ngữ Ưa thích"
+msgstr "زبان ترجیحی"
 
 #. Use 'Key' if your language requires many more characters
 #: src/components/add-system.tsx:128
 msgid "Public Key"
-msgstr "Khóa"
+msgstr "کلید عمومی"
 
 #. Disk read
 #: src/components/charts/area-chart.tsx:60
 #: src/components/charts/area-chart.tsx:70
 msgid "Read"
-msgstr "Đọc"
+msgstr "خواندن"
 
 #. Network bytes received (download)
 #: src/components/charts/area-chart.tsx:65
 msgid "Received"
-msgstr "Đã nhận"
+msgstr "دریافت شد"
 
 #: src/components/login/forgot-pass-form.tsx:76
 msgid "Reset Password"
-msgstr "Đặt lại Mật khẩu"
+msgstr "بازنشانی رمز عبور"
 
 #: src/components/systems-table/systems-table.tsx:545
 msgid "Resume"
-msgstr "Tiếp tục"
+msgstr "ادامه"
 
 #: src/components/routes/settings/notifications.tsx:117
 msgid "Save address using enter key or comma. Leave blank to disable email notifications."
-msgstr "Lưu địa chỉ bằng cách sử dụng phím enter hoặc dấu phẩy. Để trống để vô hiệu hóa thông báo email."
+msgstr "آدرس را با استفاده از کلید Enter یا کاما ذخیره کنید. برای غیرفعال کردن اعلان‌های ایمیلی، خالی بگذارید."
 
 #: src/components/routes/settings/general.tsx:106
 #: src/components/routes/settings/notifications.tsx:167
 msgid "Save Settings"
-msgstr "Lưu Cài đặt"
+msgstr "ذخیره تنظیمات"
 
 #: src/components/navbar.tsx:133
 msgid "Search"
-msgstr "Tìm kiếm"
+msgstr "جستجو"
 
 #: src/components/command-palette.tsx:46
 msgid "Search for systems or settings..."
-msgstr "Tìm kiếm hệ thống hoặc cài đặt..."
+msgstr "جستجو برای سیستم‌ها یا تنظیمات..."
 
 #: src/components/alerts/alert-button.tsx:71
 msgid "See <0>notification settings</0> to configure how you receive alerts."
-msgstr "Xem <0>cài đặt thông báo</0> để cấu hình cách bạn nhận cảnh báo."
+msgstr "برای پیکربندی نحوه دریافت هشدارها، به <0>تنظیمات اعلان</0> مراجعه کنید."
 
 #. Network bytes sent (upload)
 #: src/components/charts/area-chart.tsx:64
 msgid "Sent"
-msgstr "Đã gửi"
+msgstr "ارسال شد"
 
 #: src/components/routes/settings/general.tsx:100
 msgid "Sets the default time range for charts when a system is viewed."
-msgstr "Đặt phạm vi thời gian mặc định cho biểu đồ khi một hệ thống được xem."
+msgstr "بازه زمانی پیش‌فرض برای نمودارها هنگام مشاهده یک سیستم را تعیین می‌کند."
 
 #: src/components/command-palette.tsx:95
 #: src/components/command-palette.tsx:98
@@ -634,35 +634,35 @@ msgstr "Đặt phạm vi thời gian mặc định cho biểu đồ khi một h�
 #: src/components/routes/settings/layout.tsx:71
 #: src/components/routes/settings/layout.tsx:82
 msgid "Settings"
-msgstr "Cài đặt"
+msgstr "تنظیمات"
 
 #: src/components/routes/settings/layout.tsx:33
 msgid "Settings saved"
-msgstr "Cài đặt đã được lưu"
+msgstr "تنظیمات ذخیره شد"
 
 #: src/components/login/auth-form.tsx:191
 msgid "Sign in"
-msgstr "Đăng nhập"
+msgstr "ورود"
 
 #: src/components/command-palette.tsx:185
 msgid "SMTP settings"
-msgstr "Cài đặt SMTP"
+msgstr "تنظیمات SMTP"
 
 #: src/components/systems-table/systems-table.tsx:308
 msgid "Sort By"
-msgstr "Sắp xếp theo"
+msgstr "مرتب‌سازی بر اساس"
 
 #: src/lib/utils.ts:282
 msgid "Status"
-msgstr "Trạng thái"
+msgstr "وضعیت"
 
 #: src/components/routes/system.tsx:473
 msgid "Swap space used by the system"
-msgstr "Không gian hoán đổi được sử dụng bởi hệ thống"
+msgstr "فضای Swap استفاده شده توسط سیستم"
 
 #: src/components/routes/system.tsx:472
 msgid "Swap Usage"
-msgstr "Sử dụng Hoán đổi"
+msgstr "میزان استفاده از Swap"
 
 #. System theme
 #: src/components/mode-toggle.tsx:26
@@ -671,161 +671,161 @@ msgstr "Sử dụng Hoán đổi"
 #: src/components/systems-table/systems-table.tsx:136
 #: src/components/systems-table/systems-table.tsx:465
 msgid "System"
-msgstr "Hệ thống"
+msgstr "سیستم"
 
 #: src/components/navbar.tsx:77
 msgid "Systems"
-msgstr "Các hệ thống"
+msgstr "سیستم‌ها"
 
 #: src/components/routes/settings/config-yaml.tsx:55
 msgid "Systems may be managed in a <0>config.yml</0> file inside your data directory."
-msgstr "Các hệ thống có thể được quản lý trong tệp <0>config.yml</0> bên trong thư mục dữ liệu của bạn."
+msgstr "سیستم‌ها ممکن است در یک فایل <0>config.yml</0> درون دایرکتوری داده شما مدیریت شوند."
 
 #: src/components/systems-table/systems-table.tsx:296
 msgid "Table"
-msgstr "Bảng"
+msgstr "جدول"
 
 #: src/components/routes/system.tsx:484
 #: src/lib/utils.ts:314
 msgid "Temperature"
-msgstr "Nhiệt độ"
+msgstr "دما"
 
 #: src/components/routes/system.tsx:485
 msgid "Temperatures of system sensors"
-msgstr "Nhiệt độ của các cảm biến hệ thống"
+msgstr "دمای حسگرهای سیستم"
 
 #: src/components/routes/settings/notifications.tsx:211
 msgid "Test <0>URL</0>"
-msgstr "Kiểm tra <0>URL</0>"
+msgstr "تست <0>آدرس اینترنتی</0>"
 
 #: src/components/routes/settings/notifications.tsx:182
 msgid "Test notification sent"
-msgstr "Thông báo thử nghiệm đã được gửi"
+msgstr "اعلان آزمایشی ارسال شد"
 
 #: src/components/add-system.tsx:108
 msgid "The agent must be running on the system to connect. Copy the installation command for the agent below."
-msgstr "Tác nhân phải đang chạy trên hệ thống để kết nối. Sao chép lệnh cài đặt cho tác nhân bên dưới."
+msgstr "برای اتصال، عامل باید روی سیستم در حال اجرا باشد. دستور نصب عامل را از زیر کپی کنید."
 
 #: src/components/add-system.tsx:99
 msgid "The agent must be running on the system to connect. Copy the<0>docker-compose.yml</0> for the agent below."
-msgstr "Tác nhân phải đang chạy trên hệ thống để kết nối. Sao chép <0>docker-compose.yml</0> cho tác nhân bên dưới."
+msgstr "برای اتصال، عامل باید روی سیستم در حال اجرا باشد. <0>docker-compose.yml</0> مربوط به عامل را از زیر کپی کنید."
 
 #: src/components/login/forgot-pass-form.tsx:98
 msgid "Then log into the backend and reset your user account password in the users table."
-msgstr "Sau đó đăng nhập vào backend và đặt lại mật khẩu tài khoản người dùng của bạn trong bảng người dùng."
+msgstr "سپس وارد بخش پشتیبان شوید و رمز عبور حساب کاربری خود را در جدول کاربران بازنشانی کنید."
 
 #: src/components/systems-table/systems-table.tsx:573
 msgid "This action cannot be undone. This will permanently delete all current records for {name} from the database."
-msgstr "Hành động này không thể hoàn tác. Điều này sẽ xóa vĩnh viễn tất cả các bản ghi hiện tại cho {name} khỏi cơ sở dữ liệu."
+msgstr "این عمل قابل برگشت نیست. این کار تمام رکوردهای فعلی {name} را برای همیشه از پایگاه داده حذف خواهد کرد."
 
 #: src/components/routes/system.tsx:564
 msgid "Throughput of {extraFsName}"
-msgstr "Thông lượng của {extraFsName}"
+msgstr "توان عملیاتی {extraFsName}"
 
 #: src/components/routes/system.tsx:432
 msgid "Throughput of root filesystem"
-msgstr "Thông lượng của hệ thống tệp gốc"
+msgstr "توان عملیاتی سیستم فایل ریشه"
 
 #: src/components/routes/settings/notifications.tsx:106
 msgid "To email(s)"
-msgstr "Đến email(s)"
+msgstr "به ایمیل(ها)"
 
 #: src/components/routes/system.tsx:359
 #: src/components/routes/system.tsx:372
 msgid "Toggle grid"
-msgstr "Chuyển đổi lưới"
+msgstr "تغییر نمایش جدول"
 
 #: src/components/mode-toggle.tsx:33
 msgid "Toggle theme"
-msgstr "Chuyển đổi chủ đề"
+msgstr "تغییر تم"
 
 #: src/lib/utils.ts:317
 msgid "Triggers when any sensor exceeds a threshold"
-msgstr "Kích hoạt khi bất kỳ cảm biến nào vượt quá ngưỡng"
+msgstr "هنگامی که هر حسگری از یک آستانه فراتر رود، فعال می‌شود"
 
 #: src/lib/utils.ts:310
 msgid "Triggers when combined up/down exceeds a threshold"
-msgstr "Kích hoạt khi kết hợp lên/xuống vượt quá ngưỡng"
+msgstr "هنگامی که مجموع بالا/پایین از یک آستانه فراتر رود، فعال می‌شود"
 
 #: src/lib/utils.ts:292
 msgid "Triggers when CPU usage exceeds a threshold"
-msgstr "Kích hoạt khi sử dụng CPU vượt quá ngưỡng"
+msgstr "هنگامی که میزان استفاده از CPU از یک آستانه فراتر رود، فعال می‌شود"
 
 #: src/lib/utils.ts:298
 msgid "Triggers when memory usage exceeds a threshold"
-msgstr "Kích hoạt khi sử dụng bộ nhớ vượt quá ngưỡng"
+msgstr "هنگامی که میزان استفاده از حافظه از یک آستانه فراتر رود، فعال می‌شود"
 
 #: src/lib/utils.ts:285
 msgid "Triggers when status switches between up and down"
-msgstr "Kích hoạt khi trạng thái chuyển đổi giữa lên và xuống"
+msgstr "هنگامی که وضعیت بین بالا و پایین تغییر می‌کند، فعال می‌شود"
 
 #: src/lib/utils.ts:304
 msgid "Triggers when usage of any disk exceeds a threshold"
-msgstr "Kích hoạt khi sử dụng bất kỳ đĩa nào vượt quá ngưỡng"
+msgstr "هنگامی که استفاده از هر دیسکی از یک آستانه فراتر رود، فعال می‌شود"
 
 #: src/components/systems-table/systems-table.tsx:269
 msgid "Updated in real time. Click on a system to view information."
-msgstr "Cập nhật theo thời gian thực. Nhấp vào một hệ thống để xem thông tin."
+msgstr "به صورت لحظه‌ای به‌روزرسانی می‌شود. برای مشاهده اطلاعات، روی یک سیستم کلیک کنید."
 
 #: src/components/routes/system.tsx:261
 msgid "Uptime"
-msgstr "Thời gian hoạt động"
+msgstr "آپتایم"
 
 #: src/components/charts/area-chart.tsx:73
 #: src/components/routes/system.tsx:514
 #: src/components/routes/system.tsx:551
 msgid "Usage"
-msgstr "Sử dụng"
+msgstr "میزان استفاده"
 
 #: src/components/routes/system.tsx:424
 msgid "Usage of root partition"
-msgstr "Sử dụng phân vùng gốc"
+msgstr "میزان استفاده از پارتیشن ریشه"
 
 #: src/components/charts/area-chart.tsx:73
 #: src/components/charts/mem-chart.tsx:65
 #: src/components/charts/swap-chart.tsx:56
 msgid "Used"
-msgstr "Đã sử dụng"
+msgstr "استفاده شده"
 
 #: src/components/command-palette.tsx:142
 #: src/components/navbar.tsx:69
 msgid "Users"
-msgstr "Người dùng"
+msgstr "کاربران"
 
 #: src/components/systems-table/systems-table.tsx:278
 msgid "View"
-msgstr "Xem"
+msgstr "مشاهده"
 
 #: src/components/systems-table/systems-table.tsx:342
 msgid "Visible Fields"
-msgstr "Các cột hiển thị"
+msgstr "فیلدهای قابل مشاهده"
 
 #: src/components/routes/system.tsx:662
 msgid "Waiting for enough records to display"
-msgstr "Đang chờ đủ bản ghi để hiển thị"
+msgstr "در انتظار رکوردهای کافی برای نمایش"
 
 #: src/components/routes/settings/general.tsx:48
 msgid "Want to help us make our translations even better? Check out <0>Crowdin</0> for more details."
-msgstr "Muốn giúp chúng tôi cải thiện bản dịch của mình? Xem <0>Crowdin</0> để biết thêm chi tiết."
+msgstr "می‌خواهید به ما کمک کنید تا ترجمه‌های خود را بهتر کنیم؟ برای جزئیات بیشتر به <0>Crowdin</0> مراجعه کنید."
 
 #: src/components/routes/settings/notifications.tsx:124
 msgid "Webhook / Push notifications"
-msgstr "Thông báo Webhook / Push"
+msgstr "اعلان‌های Webhook / Push"
 
 #. Disk write
 #: src/components/charts/area-chart.tsx:59
 #: src/components/charts/area-chart.tsx:69
 msgid "Write"
-msgstr "Ghi"
+msgstr "نوشتن"
 
 #: src/components/routes/settings/layout.tsx:61
 msgid "YAML Config"
-msgstr "Cấu hình YAML"
+msgstr "پیکربندی YAML"
 
 #: src/components/routes/settings/config-yaml.tsx:45
 msgid "YAML Configuration"
-msgstr "Cấu hình YAML"
+msgstr "پیکربندی YAML"
 
 #: src/components/routes/settings/layout.tsx:34
 msgid "Your user settings have been updated."
-msgstr "Cài đặt người dùng của bạn đã được cập nhật."
+msgstr "تنظیمات کاربری شما به‌روزرسانی شد."
